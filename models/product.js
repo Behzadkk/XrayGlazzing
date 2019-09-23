@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: "must be one of the main categories"
   },
-  SubCat: String,
+  subCat: String,
   description: String,
   mainPhotos: [
     {
