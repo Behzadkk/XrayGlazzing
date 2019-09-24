@@ -4,6 +4,7 @@ const router = express.Router();
 const productController = require("../controllers/products-controller");
 const photoController = require("../controllers/photos-controller");
 const drawingController = require("../controllers/drawing-controllers");
+const projectController = require("../controllers/projects-controller");
 
 router.get("/products/:productType", productController.getAProduct);
 router.post("/products", productController.createAProduct);
@@ -20,5 +21,10 @@ router.get("/drawings", drawingController.getAllDrawings);
 router.post("/drawings", drawingController.uploadADrawing);
 router.put("/drawings/:id", drawingController.editADrawing);
 router.delete("/drawings/:id", drawingController.deleteADrawing);
+
+router.get("/projects", projectController.getAllProjects);
+router.post("/projects", projectController.uploadAProject);
+router.put("/projects/:id", projectController.editAProject);
+router.delete("/projects/:id", projectController.deleteAProject);
 
 module.exports = router;
