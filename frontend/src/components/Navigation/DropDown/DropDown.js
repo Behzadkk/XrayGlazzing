@@ -2,9 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const DropDown = props => {
-  const navItems = props.products.map(product => {
+  const navItems = props.products.map((product, i) => {
     return (
-      <NavLink to={product.link} className="dropdown-item">
+      <NavLink key={i} to={product.link} className="dropdown-item">
         {product.name}
       </NavLink>
     );

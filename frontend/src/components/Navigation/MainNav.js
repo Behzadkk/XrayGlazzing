@@ -46,7 +46,7 @@ const MainNavigation = props => (
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="#">
-                About Us
+                About
               </NavLink>
             </li>
           </ul>

@@ -1,6 +1,7 @@
 import React from "react";
+import "./Carousel.css";
 
-const test = () => (
+const Carousel = () => (
   <div
     id="carouselExampleControls"
     className="carousel slide"
@@ -8,13 +9,25 @@ const test = () => (
   >
     <div className="carousel-inner">
       <div className="carousel-item active">
-        <img className="d-block w-100" src="..." alt="First slide" />
+        <img
+          className="d-block w-100"
+          src="https://cdn.pixabay.com/photo/2017/04/24/13/37/architecture-2256489_960_720.jpg"
+          alt="First slide"
+        />
       </div>
       <div className="carousel-item">
-        <img className="d-block w-100" src="..." alt="Second slide" />
+        <img
+          className="d-block w-100"
+          src="https://cdn.pixabay.com/photo/2015/05/15/14/21/architecture-768432_960_720.jpg"
+          alt="Second slide"
+        />
       </div>
       <div className="carousel-item">
-        <img className="d-block w-100" src="..." alt="Third slide" />
+        <img
+          className="d-block w-100"
+          src="https://cdn.pixabay.com/photo/2013/04/11/19/46/louvre-102840_960_720.jpg"
+          alt="Third slide"
+        />
       </div>
     </div>
     <a
@@ -38,4 +51,4 @@ const test = () => (
   </div>
 );
 
-export default test;
+export default Carousel;
