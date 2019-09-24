@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import Hero from "../components/Hero/Hero";
+import Cards from "../components/Cards/Cards";
+import Featurette from "../components/Featurette/Featurette";
+import Footer from "../components/Footer/Footer";
 
 class LandingPage extends Component {
   render() {
@@ -8,7 +11,9 @@ class LandingPage extends Component {
       <div>
         <Carousel />
         <Hero />
-        <h1>Landing Page</h1>
+        <Cards />
+        <Featurette />
+        <Footer />
       </div>
     );
   }
