@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
-import LandingPage from "./pages/landing";
+
 import MainNavigation from "./components/Navigation/MainNav";
 import navbarData from "./components/Navigation/navbarData";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (

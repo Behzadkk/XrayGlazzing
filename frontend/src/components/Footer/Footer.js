@@ -67,38 +67,37 @@ const Footer = () => (
           <h5 className="title">Contact Info</h5>
           <ul className="pl-2">
             <li className="list-unstyled">
-              <div class="row">
-                <div class="col-1">
-                  <i class="fas fa-map-marker-alt"></i>
+              <div className="row">
+                <div className="col-1">
+                  <i className="fas fa-map-marker-alt"></i>
                 </div>
-                <div class="col-10">
-                  Unit 5, Brook Lane Business Center, Brook Lane North London,
-                  TW8 0PP
+                <div className="col-10">
+                  Unit 5, Brook Lane Business Center, London, TW8 0PP
                 </div>
               </div>
             </li>
             <li className="list-unstyled">
-              <div class="row">
-                <div class="col-1">
-                  <i class="fas fa-phone"></i>
+              <div className="row">
+                <div className="col-1">
+                  <i className="fas fa-phone"></i>
                 </div>
-                <div class="col-10">0208 111 111 5</div>
+                <div className="col-10">0208 111 111 5</div>
               </div>
             </li>
             <li className="list-unstyled">
-              <div class="row">
-                <div class="col-1">
-                  <i class="fas fa-mobile-alt"></i>
+              <div className="row">
+                <div className="col-1">
+                  <i className="fas fa-mobile-alt"></i>
                 </div>
-                <div class="col-10">074 5050 3030</div>
+                <div className="col-10">074 5050 3030</div>
               </div>
             </li>
             <li className="list-unstyled">
-              <div class="row">
-                <div class="col-1">
-                  <i class="fas fa-at"></i>
+              <div className="row">
+                <div className="col-1">
+                  <i className="fas fa-at"></i>
                 </div>
-                <div class="col-10">info@xrayglazing.co.uk</div>
+                <div className="col-10">info@xrayglazing.co.uk</div>
               </div>
             </li>
           </ul>
