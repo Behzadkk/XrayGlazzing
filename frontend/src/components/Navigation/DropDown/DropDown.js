@@ -4,7 +4,12 @@ import { NavLink } from "react-router-dom";
 const DropDown = props => {
   const navItems = props.products.map((product, i) => {
     return (
-      <NavLink key={i} to={product.link} className="dropdown-item">
+      <NavLink
+        key={i}
+        to={product.link}
+        className="dropdown-item"
+        onClick={props.onSelect.bind(this, product.link)}
+      >
         {product.name}
       </NavLink>
     );
@@ -13,7 +18,7 @@ const DropDown = props => {
     <li className="nav-item dropdown">
       <a
         className="nav-link dropdown-toggle"
-        href="#"
+        href=""
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"

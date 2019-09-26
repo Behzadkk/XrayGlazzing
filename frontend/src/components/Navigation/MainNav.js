@@ -7,7 +7,7 @@ import DropDown from "./DropDown/DropDown";
 const MainNavigation = props => (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
     <div className="container">
-      <a className="navbar-brand" href="#">
+      <a className="navbar-brand" href="">
         XRAY
       </a>
       <button
@@ -25,27 +25,40 @@ const MainNavigation = props => (
             <DropDown
               products={props.navbarData.Rooflights}
               name="Rooflights"
-            />{" "}
-            <DropDown products={props.navbarData.Windows} name="Windows" />
-            <DropDown products={props.navbarData.Doors} name="Doors" />
-            <DropDown products={props.navbarData.Other} name="Other Products" />
+              onSelect={props.onSelection}
+            />
+            <DropDown
+              products={props.navbarData.Windows}
+              name="Windows"
+              onSelect={props.onSelection}
+            />
+            <DropDown
+              products={props.navbarData.Doors}
+              name="Doors"
+              onSelect={props.onSelection}
+            />
+            <DropDown
+              products={props.navbarData.Other}
+              name="Other Products"
+              onSelect={props.onSelection}
+            />
             <li className="nav-item">
-              <NavLink className="nav-link" to="#">
+              <NavLink className="nav-link" to="">
                 Gallery
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="#">
+              <NavLink className="nav-link" to="">
                 Projects
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="#">
+              <NavLink className="nav-link" to="">
                 Drawings
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="#">
+              <NavLink className="nav-link" to="">
                 About
               </NavLink>
             </li>

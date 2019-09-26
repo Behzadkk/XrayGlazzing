@@ -2,77 +2,77 @@ let navbarData = {
   Rooflights: [
     {
       name: "Fixed Rooflight",
-      link: "#"
+      link: "fixed_rooflight"
     },
     {
       name: "Electric Rooflight",
-      link: "#"
+      link: "electric_rooflight"
     },
     {
       name: "Walk On Glass",
-      link: "#"
+      link: "walk_on_glass"
     }
   ],
   Windows: [
     {
       name: "Aluminium Windows",
-      link: "#"
+      link: "aluminium_windows"
     },
     {
       name: "UPVC Windows",
-      link: "#"
+      link: "upvc_windows"
     }
   ],
   Doors: [
     {
       name: "Aluminium Bi-fold Doors",
-      link: "#"
+      link: "aluminium_bifold_doors"
     },
     {
       name: "Aluminium Doors",
-      link: "#"
+      link: "aluminium_doors"
     },
     {
       name: "Aluminium Sliding Doors",
-      link: "#"
+      link: "aluminium_sliding_doors"
     },
     {
       name: "Steel Crittal Doors",
-      link: "#"
+      link: "steel_crittal_doors"
     },
     {
       name: "UPVC French Doors",
-      link: "#"
+      link: "upvc_french_doors"
     },
     {
       name: "UPVC Composite Doors",
-      link: "#"
+      link: "upvc_composite_doors"
     }
   ],
   Other: [
     {
       name: "Shower Screens",
-      link: "#"
+      link: "shower_screens"
     },
     {
       name: "Glass Balustrade",
-      link: "#"
+      link: "glass_balustrade"
     },
     {
       name: "Shop Fronts",
-      link: "#"
+      link: "shop_fronts"
     },
     {
       name: "Glass Partitions",
-      link: "#"
+      link: "glass_partitions"
     },
     {
       name: "Splash Back",
-      link: "#"
+      link: "spalsh_back"
     },
     {
       name: "Mirrors",
-      link: "#"
+      link: "mirrors"
     }
   ]
 };

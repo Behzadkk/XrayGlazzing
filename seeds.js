@@ -4,7 +4,7 @@ const Product = require("./models/product");
 const data = [
   {
     group: "rooflights",
-    subCat: "fixe_rooflight",
+    subCat: "fixed_rooflight",
     description:
       "Laboris in duis id adipisicing nostrud qui reprehenderit non non quis enim fugiat tempor ut."
   },
@@ -75,31 +75,31 @@ const data = [
       "Mollit duis duis ullamco dolor id. In magna excepteur dolor elit et do id excepteur magna anim sit eiusmod adipisicing cillum. Dolor ullamco officia ad occaecat fugiat ipsum excepteur dolore minim nulla in adipisicing consectetur."
   },
   {
-    group: "doors",
+    group: "other",
     subCat: "glass_balustrade",
     description:
       "Mollit duis duis ullamco dolor id. In magna excepteur dolor elit et do id excepteur magna anim sit eiusmod adipisicing cillum. Dolor ullamco officia ad occaecat fugiat ipsum excepteur dolore minim nulla in adipisicing consectetur."
   },
   {
-    group: "doors",
+    group: "other",
     subCat: "shop_fronts",
     description:
       "Mollit duis duis ullamco dolor id. In magna excepteur dolor elit et do id excepteur magna anim sit eiusmod adipisicing cillum. Dolor ullamco officia ad occaecat fugiat ipsum excepteur dolore minim nulla in adipisicing consectetur."
   },
   {
-    group: "doors",
+    group: "other",
     subCat: "glass_partitions",
     description:
       "Mollit duis duis ullamco dolor id. In magna excepteur dolor elit et do id excepteur magna anim sit eiusmod adipisicing cillum. Dolor ullamco officia ad occaecat fugiat ipsum excepteur dolore minim nulla in adipisicing consectetur."
   },
   {
-    group: "doors",
+    group: "other",
     subCat: "spalsh_back",
     description:
       "Mollit duis duis ullamco dolor id. In magna excepteur dolor elit et do id excepteur magna anim sit eiusmod adipisicing cillum. Dolor ullamco officia ad occaecat fugiat ipsum excepteur dolore minim nulla in adipisicing consectetur."
   },
   {
-    group: "doors",
+    group: "other",
     subCat: "mirrors",
     description:
       "Mollit duis duis ullamco dolor id. In magna excepteur dolor elit et do id excepteur magna anim sit eiusmod adipisicing cillum. Dolor ullamco officia ad occaecat fugiat ipsum excepteur dolore minim nulla in adipisicing consectetur."
