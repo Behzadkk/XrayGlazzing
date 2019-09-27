@@ -50,7 +50,9 @@ class ProductsPage extends Component {
   render() {
     return (
       <div>
-        {!this.state.isLoading && (
+        {this.state.isLoading ? (
+          <p>Loading...</p>
+        ) : (
           <div>
             <h1>{this.state.product[0].subCat}</h1>
             <p>{this.state.product[0].description}</p>

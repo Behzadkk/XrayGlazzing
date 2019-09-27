@@ -13,7 +13,8 @@
     "express": "^4.17.1",
     "history": "^4.10.1",
     "mdbreact": "^4.20.0",
-    "mongoose": "^5.7.1"
+    "mongoose": "^5.7.1",
+    "react-router-dom": "^5.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.2"

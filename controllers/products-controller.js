@@ -19,7 +19,8 @@ exports.getAProduct = (req, res) => {
 };
 
 exports.createAProduct = (req, res) => {
-  const newProduct = req.body.product;
+  const newProduct = req.body;
+  console.log(req.body);
   Product.create(newProduct, function(err, createdProduct) {
     if (err) {
       console.log(err);

@@ -48,17 +48,17 @@ const MainNavigation = props => (
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="">
+            <Link className="nav-link" to="/projects">
               Projects
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="">
+            <Link className="nav-link" to="/drawings">
               Drawings
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="">
+            <Link className="nav-link" to="/about">
               About
             </Link>
           </li>

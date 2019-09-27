@@ -8,12 +8,16 @@ import LandingPage from "./pages/LandingPage";
 import ProductsPage from "./pages/ProductsPage";
 import Footer from "./components/Footer/Footer";
 import GalleryPage from "./pages/GalleryPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import DrawingsPage from "./pages/DrawingsPage";
+import AboutUsPage from "./pages/AboutUsPage";
+import AdminsPage from "./pages/AdminsPage";
 
 class App extends Component {
-  state = { selectedProduct: "mirrors", page: "landing" };
+  state = { selectedProduct: "" };
 
   selectHandler = link => {
-    this.setState({ selectedProduct: link, page: "product" });
+    this.setState({ selectedProduct: link });
   };
 
   render() {
@@ -24,17 +28,20 @@ class App extends Component {
             navbarData={navbarData}
             onSelection={this.selectHandler}
           />
-
           <div>
             <Switch>
               <Route path="/" component={LandingPage} exact />
-              <Route path="/gallery" component={GalleryPage} />
               <Route
                 path="/products/"
                 render={() => (
                   <ProductsPage selectedProduct={this.state.selectedProduct} />
                 )}
               />
+              <Route path="/gallery" component={GalleryPage} />
+              <Route path="/projects" component={ProjectsPage} />
+              <Route path="/drawings" component={DrawingsPage} />
+              <Route path="/about" component={AboutUsPage} />
+              <Route path="/admin" component={AdminsPage} />
             </Switch>
           </div>
           <Footer />
