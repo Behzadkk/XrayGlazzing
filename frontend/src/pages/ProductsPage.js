@@ -30,10 +30,7 @@ class ProductsPage extends Component {
   }
 
   fetchProduct = () => {
-    console.log(
-      `http://localhost:5000/api/products/${this.props.selectedProduct}`
-    );
-    // this.setState({ isLoading: true });
+    this.setState({ isLoading: true });
     fetch(`http://localhost:5000/api/products/${this.props.selectedProduct}`)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
@@ -43,7 +40,6 @@ class ProductsPage extends Component {
       })
       .then(resData => {
         this.setState({ product: resData.products, isLoading: false });
-        console.log(this.state.product[0]);
       })
       .catch(err => {
         console.log(err);
@@ -54,7 +50,6 @@ class ProductsPage extends Component {
   render() {
     return (
       <div>
-        product page
         {!this.state.isLoading && (
           <div>
             <h1>{this.state.product[0].subCat}</h1>

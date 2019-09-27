@@ -6,7 +6,7 @@ const DropDown = props => {
     return (
       <NavLink
         key={i}
-        to={product.link}
+        to={"/products/" + product.link}
         className="dropdown-item"
         onClick={props.onSelect.bind(this, product.link)}
       >
@@ -16,15 +16,15 @@ const DropDown = props => {
   });
   return (
     <li className="nav-item dropdown">
-      <a
+      <NavLink
         className="nav-link dropdown-toggle"
-        href=""
+        to=""
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
       >
         {props.name}
-      </a>
+      </NavLink>
       <div className="dropdown-menu dropdown-content m-0 p-0">{navItems}</div>
     </li>
   );

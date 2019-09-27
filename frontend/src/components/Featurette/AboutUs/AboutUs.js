@@ -16,6 +16,7 @@ const AboutUs = () => (
       <img
         className="w-100"
         src="https://cdn.pixabay.com/photo/2017/04/24/13/37/architecture-2256489_960_720.jpg"
+        alt="about xray glazing"
       />
     </div>
   </div>
