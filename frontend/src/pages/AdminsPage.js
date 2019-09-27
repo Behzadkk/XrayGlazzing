@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import AssetSelector from "../components/AssetSelector/AssetSelector";
 import NewProduct from "../components/NewProduct/NewProduct";
+import GalleryImagePicker from "../components/GalleryImagePicker/GalleryImagePicker";
 
 class AdminsPage extends Component {
   constructor(props) {
@@ -9,15 +11,18 @@ class AdminsPage extends Component {
     this.descEl = React.createRef();
   }
 
-  state = { creatingAsset: null };
-  confirmProduct = e => {
-    e.preventDefault();
+  state = { creatingAsset: "photo" };
+  selectTypeHandler = e => {
+    this.setState({ creatingAsset: e.target.value });
+  };
+
+  confirmProduct = () => {
     const subCat = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
     const description = this.descEl.current.value;
     const product = { subCat, group, description };
     const requestBody = { ...product };
-    fetch("http://localhost:5000/api/products", {
+    fetch("/api/products", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -30,7 +35,7 @@ class AdminsPage extends Component {
         }
         return res.json();
       })
-      .then(resData => alert(resData.toString() + "added to databe"))
+      //   .then(resData => alert(resData.toString() + "added to databe"))
       .catch(err => {
         console.log(err);
       });
@@ -38,12 +43,18 @@ class AdminsPage extends Component {
 
   render() {
     return (
-      <NewProduct
-        onConfirm={this.confirmProduct}
-        subCatInput={this.subCatEl}
-        groupInput={this.groupEl}
-        descInput={this.descEl}
-      />
+      <div>
+        <AssetSelector assetSelection={this.selectTypeHandler} />
+        {this.state.creatingAsset === "product" && (
+          <NewProduct
+            onConfirm={this.confirmProduct}
+            subCatInput={this.subCatEl}
+            groupInput={this.groupEl}
+            descInput={this.descEl}
+          />
+        )}
+        <GalleryImagePicker />
+      </div>
     );
   }
 }
