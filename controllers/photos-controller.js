@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Photo = require("../models/photo");
+const Product = require("../models/product");
 
 // Show all photos// Index
-// We dont need it yet
 exports.getAllPhotos = (req, res) => {
   Photo.find({}, function(err, photos) {
     if (err) {
@@ -30,7 +30,7 @@ exports.getPhotos = (req, res) => {
 };
 
 exports.uploadAPhoto = (req, res) => {
-  const newPhoto = req.body.photo;
+  const newPhoto = req.body;
   Photo.create(newPhoto, function(err, createdPhoto) {
     if (err) {
       console.log(err);

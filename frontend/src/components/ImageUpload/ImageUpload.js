@@ -2,19 +2,41 @@ import React from "react";
 import "./ImageUpload.css";
 
 import { sendFile } from "../../helpers/fileUploader";
+import CategorySelector from "../CategorySelector/CategorySelector";
 
 class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { file: {}, imagePreviewUrl: "" };
+    this.catEl = React.createRef();
+    this.state = { file: {}, imagePreviewUrl: "", savedFile: "" };
   }
 
   _handleSubmit(e) {
     e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log("handle uploading-", this.state.file);
-    console.log(e.target.files);
-    sendFile(this.state.file);
+
+    const category = this.catEl.current.value;
+    const source = "/images/" + this.state.savedFile;
+
+    const photo = { category, source };
+    const requestBody = { ...photo };
+    console.log(requestBody);
+    fetch("http://localhost:5000/api/gallery", {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+      headers: {
+        "content-type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res.json();
+      })
+      .then(resData => alert(resData.toString() + "added to databe"))
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   _handleImageChange(e) {
@@ -22,7 +44,15 @@ class ImageUpload extends React.Component {
 
     let reader = new FileReader();
     let file = e.target.files[0];
-    sendFile(file);
+
+    const formData = new FormData();
+    formData.append("myFile", file);
+    fetch(`http://localhost:5000/image-upload`, {
+      method: "POST",
+      body: formData
+    })
+      .then(res => res.json())
+      .then(res => this.setState({ savedFile: res[0] }));
 
     reader.onloadend = () => {
       this.setState({
@@ -52,7 +82,8 @@ class ImageUpload extends React.Component {
 
     return (
       <div className="previewComponent">
-        <form>
+        <form onSubmit={e => this._handleSubmit(e)}>
+          <CategorySelector categoryInput={this.catEl} />
           <div className="form-group row justify-content-between">
             <label className="my-2 mx-3" htmlFor="image">
               Image
@@ -65,7 +96,6 @@ class ImageUpload extends React.Component {
                 name="image"
                 accept="image/*"
                 onChange={e => this._handleImageChange(e)}
-                onSubmit={e => this._handleSubmit(e)}
                 required
               />
             </div>
@@ -76,10 +106,11 @@ class ImageUpload extends React.Component {
           <div className="form-group row justify-content-end mt-5 mt-sm-0">
             <div className="col-sm-9">
               <button
+                onClick={e => this._handleSubmit(e)}
                 className="btn btn-lg btn-primary btn-block"
                 type="submit"
               >
-                Upload Image
+                Append Photo
               </button>
             </div>
           </div>

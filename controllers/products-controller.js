@@ -2,7 +2,17 @@ const mongoose = require("mongoose");
 const Product = require("../models/product");
 
 // Show all products// Index
-// We dont need it yet
+exports.getAllProduct = (req, res) => {
+  Product.find({}, function(err, products) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).json({
+        products: products
+      });
+    }
+  });
+};
 
 // Show all products in a sub category
 exports.getAProduct = (req, res) => {
