@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AssetSelector from "../components/AssetSelector/AssetSelector";
 import NewProduct from "../components/NewProduct/NewProduct";
 import GalleryImagePicker from "../components/GalleryImagePicker/GalleryImagePicker";
+import ImageUpload from "../components/ImageUpload/ImageUpload";
 
 class AdminsPage extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class AdminsPage extends Component {
     this.descEl = React.createRef();
   }
 
-  state = { creatingAsset: "photo" };
+  state = { creatingAsset: "photo", images: [] };
   selectTypeHandler = e => {
     this.setState({ creatingAsset: e.target.value });
   };
@@ -41,9 +42,13 @@ class AdminsPage extends Component {
       });
   };
 
+  imageHandler = images => {
+    console.log(images);
+  };
+
   render() {
     return (
-      <div>
+      <div className="container">
         <AssetSelector assetSelection={this.selectTypeHandler} />
         {this.state.creatingAsset === "product" && (
           <NewProduct
@@ -53,7 +58,8 @@ class AdminsPage extends Component {
             descInput={this.descEl}
           />
         )}
-        <GalleryImagePicker />
+        <ImageUpload />
+        <GalleryImagePicker selectedImages={this.imageHandler} />
       </div>
     );
   }

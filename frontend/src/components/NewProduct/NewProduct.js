@@ -9,7 +9,7 @@ class NewProduct extends Component {
         <div className="col-md-12 text-center">
           <h1 className="h3 mb-3 font-weight-normal">Create a New Product</h1>
         </div>
-        <div className="col-md-8">
+        <div className="col-md-12">
           <form>
             <div className="form-group row justify-content-between">
               <label className="my-2 mx-3" htmlFor="name">
@@ -59,7 +59,7 @@ class NewProduct extends Component {
             </div>
 
             <p>Select Phtos</p>
-            {/* <GalleryImagePicker /> */}
+            <GalleryImagePicker />
 
             <div className="form-group row justify-content-end mt-5 mt-sm-0">
               <div className="col-sm-9">

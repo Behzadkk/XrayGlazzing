@@ -46,6 +46,7 @@ class GalleryImagePicker extends Component {
         ) : (
           <ImagePicker
             images={this.state.imageList.map((image, i) => ({
+              imageId: image._id,
               src: image.source,
               value: i
             }))}
