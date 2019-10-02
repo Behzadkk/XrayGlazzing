@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Spinner from "../components/Spinner/Spinner";
+import ShowProduct from "../components/ShowProduct/ShowProduct";
 
 class ProductsPage extends Component {
   constructor(props) {
@@ -39,6 +41,7 @@ class ProductsPage extends Component {
         return res.json();
       })
       .then(resData => {
+        console.log(resData.products);
         this.setState({ product: resData.products, isLoading: false });
       })
       .catch(err => {
@@ -51,12 +54,9 @@ class ProductsPage extends Component {
     return (
       <div>
         {this.state.isLoading ? (
-          <p>Loading...</p>
+          <Spinner />
         ) : (
-          <div>
-            <h1>{this.state.product[0].subCat}</h1>
-            <p>{this.state.product[0].description}</p>
-          </div>
+          <ShowProduct product={this.state.product[0]} />
         )}
       </div>
     );

@@ -7,6 +7,7 @@ const drawingController = require("../controllers/drawing-controllers");
 const projectController = require("../controllers/projects-controller");
 
 router.get("/products", productController.getAllProduct);
+router.get("/products/:productType", productController.getAProduct);
 router.post("/products", productController.createAProduct);
 router.put("/products/:productType", productController.editAProduct);
 router.delete("/products/:productType", productController.deleteAProduct);
