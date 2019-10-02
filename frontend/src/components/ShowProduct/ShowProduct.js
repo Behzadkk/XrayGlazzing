@@ -1,4 +1,5 @@
 import React from "react";
+import CardDeck from "../CardsDeck/CardsDeck";
 
 const ShowProduct = props => {
   return (
@@ -8,10 +9,10 @@ const ShowProduct = props => {
       </h1>
       {props.product.mainPhotos.length > 0 && (
         <div>
-          <img src={props.product.mainPhotos[0]} alt={props.product.subCat} />
+          <CardDeck images={props.product.mainPhotos} />
         </div>
       )}
-      <div>
+      <div className="my-5">
         <p>{props.product.description}</p>
       </div>
     </div>

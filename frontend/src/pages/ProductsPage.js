@@ -98,6 +98,7 @@ class ProductsPage extends Component {
       .catch(err => {
         console.log(err);
       });
+    this.setState({ isEditing: false });
   };
   render() {
     return (
