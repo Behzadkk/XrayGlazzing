@@ -7,12 +7,7 @@ const productSchema = new mongoose.Schema({
   },
   subCat: String,
   description: String,
-  mainPhotos: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Photo"
-    }
-  ],
+  mainPhotos: [],
   drawings: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -7,9 +7,11 @@ const ShowProduct = props => {
         {captialize(props.product.subCat)}
       </h1>
       {props.product.mainPhotos.length > 0 && (
-        <div>Images will be addedd here</div>
+        <div>
+          <img src={props.product.mainPhotos[0]} alt={props.product.subCat} />
+        </div>
       )}
-      <div className="container">
+      <div>
         <p>{props.product.description}</p>
       </div>
     </div>

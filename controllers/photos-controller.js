@@ -4,26 +4,34 @@ const Product = require("../models/product");
 
 // Show all photos// Index
 exports.getAllPhotos = (req, res) => {
-  Photo.find({}, function(err, photos) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).json({
-        photos: photos
-      });
-    }
-  });
+  Photo.find({})
+    .populate("category")
+    .exec(function(err, photos) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json({
+          photos: photos
+        });
+      }
+    });
 };
 
 // Show all photos in a sub category
 exports.getPhotos = (req, res) => {
   const productType = req.params.productType;
-  Photo.find({ category: productType }, function(err, photos) {
+  Product.findOne({ subCat: productType }, function(err, product) {
     if (err) {
       console.log(err);
     } else {
-      res.status(200).json({
-        photos: photos
+      Photo.find({ category: product._id }, function(err, photos) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.status(200).json({
+            photos: photos
+          });
+        }
       });
     }
   });

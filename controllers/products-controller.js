@@ -42,21 +42,25 @@ exports.createAProduct = (req, res) => {
   });
 };
 
-exports.editAProduct = (req, res) => {
-  const editingProduct = req.body.product;
-  const productType = req.params.productType;
-  Product.findOneAndUpdate(productType, editingProduct, function(
-    err,
-    updatedProduct
-  ) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).json({
-        updatedProduct: updatedProduct
-      });
-    }
-  });
+exports.editAProduct = async (req, res) => {
+  try {
+    const editingProduct = req.body;
+    console.log("editingproduct", editingProduct);
+    const productType = req.params.productType;
+    console.log("product type", productType);
+    const updatedProduct = await Product.findOneAndUpdate(
+      { subCat: productType },
+      editingProduct
+    );
+    updatedProduct.save();
+
+    console.log("updated product", updatedProduct);
+    res.status(200).json({
+      updatedProduct: updatedProduct
+    });
+  } catch (error) {
+    console.log(err);
+  }
 };
 
 exports.deleteAProduct = (req, res) => {

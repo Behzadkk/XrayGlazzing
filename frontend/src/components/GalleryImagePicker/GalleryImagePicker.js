@@ -14,11 +14,12 @@ class GalleryImagePicker extends Component {
     this.onPick = this.onPick.bind(this);
   }
   componentDidMount() {
-    this.fetchGalley();
+    this.fetchGallery();
   }
-  fetchGalley = () => {
+  fetchGallery = () => {
     this.setState({ isLoading: true });
-    fetch("http://localhost:5000/api/gallery")
+
+    fetch("http://localhost:5000/api/gallery/" + this.props.product.subCat)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");
@@ -26,6 +27,7 @@ class GalleryImagePicker extends Component {
         return res.json();
       })
       .then(resData => {
+        console.log(resData);
         this.setState({ imageList: resData.photos, isLoading: false });
       })
       .catch(err => {
@@ -61,10 +63,11 @@ class GalleryImagePicker extends Component {
           />
         )}
         <button
+          className="btn btn-lg btn-success btn-block"
           type="button"
           onClick={() => this.props.selectedImages(this.state.image)}
         >
-          OK
+          Define Main photos for this group
         </button>
       </div>
     );
