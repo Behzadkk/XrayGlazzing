@@ -3,6 +3,7 @@ import AssetSelector from "../components/AssetSelector/AssetSelector";
 import NewProduct from "../components/NewProduct/NewProduct";
 import GalleryImagePicker from "../components/GalleryImagePicker/GalleryImagePicker";
 import ImageUpload from "../components/ImageUpload/ImageUpload";
+import Uploader from "../components/Uploader/Uploader";
 
 class AdminsPage extends Component {
   constructor(props) {
@@ -16,12 +17,19 @@ class AdminsPage extends Component {
   selectTypeHandler = e => {
     this.setState({ creatingAsset: e.target.value });
   };
-
+  selecImageHandler = images => {
+    this.setState(prevState => {
+      return { images: [images] };
+    });
+    console.log(images);
+    console.log(this.state.images);
+  };
   confirmProduct = () => {
     const subCat = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
     const description = this.descEl.current.value;
-    const product = { subCat, group, description };
+    const mainPhotos = [...this.state.images];
+    const product = { subCat, group, description, mainPhotos };
     const requestBody = { ...product };
     fetch("/api/products", {
       method: "POST",
@@ -42,10 +50,6 @@ class AdminsPage extends Component {
       });
   };
 
-  imageHandler = images => {
-    console.log(images);
-  };
-
   render() {
     return (
       <div className="container">
@@ -56,10 +60,10 @@ class AdminsPage extends Component {
             subCatInput={this.subCatEl}
             groupInput={this.groupEl}
             descInput={this.descEl}
+            selectedImages={this.selecImageHandler}
           />
         )}
-        <ImageUpload />
-        <GalleryImagePicker selectedImages={this.imageHandler} />
+        {this.state.creatingAsset === "photo" && <ImageUpload />}
       </div>
     );
   }

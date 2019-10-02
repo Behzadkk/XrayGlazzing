@@ -33,7 +33,7 @@ class ImageUpload extends React.Component {
         }
         return res.json();
       })
-      .then(resData => alert(resData.toString() + "added to databe"))
+      .then(resData => this.setState({ imagePreviewUrl: null }))
       .catch(err => {
         console.log(err);
       });

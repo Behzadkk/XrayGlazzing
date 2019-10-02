@@ -3,6 +3,11 @@ import GalleryImagePicker from "../GalleryImagePicker/GalleryImagePicker";
 
 class NewProduct extends Component {
   state = { selectingPhotos: false };
+  showGalleryHandler = () => {
+    this.setState(prevState => {
+      return { selectingPhotos: !prevState.selectingPhotos };
+    });
+  };
   render() {
     return (
       <div className="row justify-content-center my-5">
@@ -58,8 +63,10 @@ class NewProduct extends Component {
               </div>
             </div>
 
-            <p>Select Phtos</p>
-            <GalleryImagePicker />
+            {/* <p onClick={this.showGalleryHandler}>Select Phtos</p>
+            {this.state.selectingPhotos && (
+              <GalleryImagePicker selectedImages={this.props.selectedImages} />
+            )} */}
 
             <div className="form-group row justify-content-end mt-5 mt-sm-0">
               <div className="col-sm-9">

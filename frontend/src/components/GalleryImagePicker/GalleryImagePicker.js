@@ -7,7 +7,7 @@ class GalleryImagePicker extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      image: null,
+      image: [],
       imageList: null
     };
 
@@ -35,7 +35,14 @@ class GalleryImagePicker extends Component {
   };
 
   onPick(image) {
-    this.setState({ image });
+    this.setState(prevState => {
+      const selections = prevState.image;
+      if (selections.length > 2) {
+        selections.shift();
+      }
+      selections.push(image);
+      return { image: selections };
+    });
   }
 
   render() {

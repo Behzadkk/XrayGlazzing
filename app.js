@@ -64,6 +64,32 @@ app.post("/image-upload", (req, res) => {
   });
 });
 
+// app.post("/image-upload", (req, res) => {
+//   const images = [];
+//   const values = Object.values(req.files);
+//   const promises = values.map(image => {
+//     const fileName =
+//       Math.floor(Math.random() * 1000000) +
+//       "_" +
+//       helper.escapeRegex(image.name);
+//     fs.readFile(image.path, (err, data) => {
+//       const newPath = __dirname + "/frontend/public/images/" + fileName;
+//       fs.writeFile(newPath, data, error => {
+//         if (error) {
+//           console.error(error);
+//           res.end();
+//         } else {
+//           images.push(fileName);
+//           res.end(images);
+//           //here you can save the file name to db, if needed
+//         }
+//       });
+//     });
+//   });
+
+//   Promise.all(promises).then(results => res.json(results));
+// });
+
 app.listen(5000, () => {
   console.log("Xray server started at port 5000");
 });
