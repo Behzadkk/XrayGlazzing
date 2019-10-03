@@ -1,7 +1,7 @@
 import React from "react";
 import "./ImageUpload.css";
 
-import { sendFile } from "../../helpers/fileUploader";
+// import { sendFile } from "../../helpers/fileUploader";
 import CategorySelector from "../CategorySelector/CategorySelector";
 
 class ImageUpload extends React.Component {

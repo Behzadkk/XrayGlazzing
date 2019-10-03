@@ -47,7 +47,6 @@ class ProductsPage extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData.products);
         this.setState({ product: resData.products, isLoading: false });
       })
       .catch(err => {
@@ -65,9 +64,9 @@ class ProductsPage extends Component {
     const src = [];
     list.map(item => {
       src.push(item.src);
+      return src;
     });
     this.setState({ mainPhotos: src });
-    console.log(this.state.mainPhotos);
   };
   confirmEdit = e => {
     e.preventDefault();

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import AssetSelector from "../components/AssetSelector/AssetSelector";
 import NewProduct from "../components/NewProduct/NewProduct";
-import GalleryImagePicker from "../components/GalleryImagePicker/GalleryImagePicker";
+// import GalleryImagePicker from "../components/GalleryImagePicker/GalleryImagePicker";
 import ImageUpload from "../components/ImageUpload/ImageUpload";
-import Uploader from "../components/Uploader/Uploader";
+// import Uploader from "../components/Uploader/Uploader";
 
 class AdminsPage extends Component {
   constructor(props) {

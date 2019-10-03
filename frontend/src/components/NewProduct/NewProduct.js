@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GalleryImagePicker from "../GalleryImagePicker/GalleryImagePicker";
+// import GalleryImagePicker from "../GalleryImagePicker/GalleryImagePicker";
 
 class NewProduct extends Component {
   state = { selectingPhotos: false };

@@ -4,7 +4,7 @@ const CardDeck = props => {
   return (
     <div className="card-deck">
       {props.images.map((image, i) => (
-        <div className="card">
+        <div key={i} className="card">
           <img className="card-img-top" src={image} alt={image} />
         </div>
       ))}
