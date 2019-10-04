@@ -18,8 +18,11 @@ class GalleryImagePicker extends Component {
   }
   fetchGallery = () => {
     this.setState({ isLoading: true });
-
-    fetch("http://localhost:5000/api/gallery/" + this.props.product.subCat)
+    let endPoint = "";
+    if (this.props.product) {
+      endPoint = this.props.product.subCat;
+    }
+    fetch("http://localhost:5000/api/gallery/" + endPoint)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");
@@ -39,9 +42,9 @@ class GalleryImagePicker extends Component {
   onPick(image) {
     this.setState(prevState => {
       const selections = prevState.image;
-      if (selections.length > 2) {
-        selections.shift();
-      }
+      // if (selections.length > 2) {
+      //   selections.shift();
+      // }
       selections.push(image);
       return { image: selections };
     });

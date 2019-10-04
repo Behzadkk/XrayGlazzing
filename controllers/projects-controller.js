@@ -14,7 +14,7 @@ exports.getAllProjects = (req, res) => {
 };
 
 exports.uploadAProject = (req, res) => {
-  const newProject = req.body.project;
+  const newProject = req.body;
   Project.create(newProject, function(err, createdProject) {
     if (err) {
       console.log(err);
@@ -26,18 +26,19 @@ exports.uploadAProject = (req, res) => {
   });
 };
 
-exports.editAProject = (req, res) => {
-  const editingProject = req.body.project;
-  const id = req.params.id;
-  Project.findOneAndUpdate(id, editingProject, function(err, updatedProject) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).json({
-        updatedProject: updatedProject
-      });
-    }
-  });
+exports.editAProject = async (req, res) => {
+  try {
+    const editingProject = req.body;
+    const id = req.params.id;
+    const updatedProject = await Project.findByIdAndUpdate(id, editingProject);
+    console.log(updatedProject);
+    updatedProject.save();
+    res.status(200).json({
+      updatedProject: updatedProject
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.deleteAProject = (req, res) => {

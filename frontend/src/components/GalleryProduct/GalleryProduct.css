@@ -79,23 +79,10 @@
   top: 0;
   left: 0;
 }
-.modal-body button {
-  position: absolute;
-  display: inline;
-  color: #222;
-  text-decoration: none;
-  line-height: 36px;
-  font-size: 30px;
-  font-weight: lighter;
-  background: #fff;
-  border-radius: 5px;
-  height: 40px;
-  width: 40px;
-  text-align: center;
-}
+
 .modal-body a {
   position: absolute;
-  display: inline;
+  display: inline-block;
   color: #222;
   text-decoration: none;
   line-height: 36px;

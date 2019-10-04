@@ -1,13 +1,9 @@
 const mongoose = require("mongoose");
 
 const projectSchema = mongoose.Schema({
+  name: String,
   description: String,
-  photos: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Photo"
-    }
-  ],
+  photos: [],
   products: [
     {
       type: mongoose.Schema.Types.ObjectId,

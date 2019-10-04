@@ -74,6 +74,10 @@ class App extends Component {
                   path="/photos/:product"
                   render={props => <GalleryProduct {...props} />}
                 />
+                {/* <Route
+                  path="/project/:project"
+                  render={props => <GalleryProduct {...props} api="project" />}
+                /> */}
                 <Route path="/projects" component={ProjectsPage} />
                 <Route path="/drawings" component={DrawingsPage} />
                 <Route path="/about" component={AboutUsPage} />

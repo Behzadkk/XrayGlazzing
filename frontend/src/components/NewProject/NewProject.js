@@ -1,10 +1,10 @@
 import React from "react";
 
-const NewProduct = props => {
+const NewProject = props => {
   return (
     <div className="row justify-content-center my-5">
       <div className="col-md-12 text-center">
-        <h1 className="h3 mb-3 font-weight-normal">Create a New Product</h1>
+        <h1 className="h3 mb-3 font-weight-normal">Define A New Project</h1>
       </div>
       <div className="col-md-12">
         <form>
@@ -17,26 +17,9 @@ const NewProduct = props => {
                 className="form-control"
                 type="text"
                 id="name"
-                placeholder="Fixed Rooflight"
-                ref={props.subCatInput}
+                placeholder="Project's name"
+                ref={props.projectInput}
               />
-            </div>
-          </div>
-          <div className="form-group row justify-content-between">
-            <label className="my-2 mx-3" htmlFor="categorey">
-              Categorey
-            </label>
-            <div className="col-sm-9">
-              <select
-                className="form-control"
-                id="categorey"
-                ref={props.groupInput}
-              >
-                <option value="rooflights">Rooflights</option>
-                <option value="windows">Windows</option>
-                <option value="doors">Doors</option>
-                <option value="other">Other Products</option>
-              </select>
             </div>
           </div>
           <div className="form-group row justify-content-between">
@@ -50,8 +33,12 @@ const NewProduct = props => {
                 cols="50"
                 id="description"
                 placeholder="Excepteur nostrud ipsum reprehenderit eu cillum aliquip mollit voluptate aute esse sint culpa magna ipsum."
-                ref={props.descInput}
+                ref={props.projDescInput}
               />
+              <p>
+                "You can add photos at editing section of projects. Please only
+                add project's name and description"
+              </p>
             </div>
           </div>
           <div className="form-group row justify-content-end mt-5 mt-sm-0">
@@ -70,4 +57,4 @@ const NewProduct = props => {
   );
 };
 
-export default NewProduct;
+export default NewProject;

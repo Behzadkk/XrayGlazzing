@@ -59,7 +59,7 @@ exports.editAProduct = async (req, res) => {
       updatedProduct: updatedProduct
     });
   } catch (error) {
-    console.log(err);
+    console.log(error);
   }
 };
 
