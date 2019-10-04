@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Product = require("../models/product");
+const Photo = require("../models/photo");
 
 // Show all products// Index
 exports.getAllProduct = (req, res) => {
@@ -16,16 +17,35 @@ exports.getAllProduct = (req, res) => {
 
 // Show all products in a sub category
 exports.getAProduct = (req, res) => {
+  let products = [];
   const productType = req.params.productType;
-  Product.find({ subCat: productType }, function(err, products) {
+  Product.findOne({ subCat: productType }, function(err, foundProduct) {
     if (err) {
       console.log(err);
-    } else {
-      res.status(200).json({
-        products: products
-      });
     }
+    products.push(foundProduct);
+    Photo.find({ category: foundProduct._id }, function(err, photos) {
+      if (err) {
+        console.log(err);
+      } else {
+        products.push({ photos });
+        console.log(foundProduct);
+        res.status(200).json({
+          products: products
+        });
+      }
+    });
   });
+
+  // Product.find({ subCat: productType }, function(err, products) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     res.status(200).json({
+  //       products: products
+  //     });
+  //   }
+  // });
 };
 
 exports.createAProduct = (req, res) => {

@@ -18,6 +18,7 @@ class ProductsPage extends Component {
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     this.fetchProduct();
   }
 
@@ -47,7 +48,9 @@ class ProductsPage extends Component {
         return res.json();
       })
       .then(resData => {
+        console.log(resData);
         this.setState({ product: resData.products, isLoading: false });
+        console.log(this.state.product);
       })
       .catch(err => {
         console.log(err);
@@ -101,11 +104,14 @@ class ProductsPage extends Component {
   };
   render() {
     return (
-      <div className="container">
+      <div className="">
         {this.state.isLoading ? (
           <Spinner />
         ) : (
-          <ShowProduct product={this.state.product[0]} />
+          <ShowProduct
+            product={this.state.product[0]}
+            photos={this.state.product[1]}
+          />
         )}
         <button
           className="btn btn-sm btn-warning"
