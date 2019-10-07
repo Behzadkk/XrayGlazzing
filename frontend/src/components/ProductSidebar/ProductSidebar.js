@@ -1,24 +1,59 @@
 import React from "react";
 import Carousel from "../Carousel/Carousel";
 import Spinner from "../Spinner/Spinner";
+import { Link } from "react-router-dom";
 
 const ProductSidebar = props => (
-  <ul class="nav flex-column">
-    <li></li>
-    <li class="nav-item">
-      Gallery
-      {props.photos ? <Carousel photos={props.photos} /> : <Spinner />}
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        Project
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        drawing
-      </a>
-    </li>
+  <ul className="nav flex-column">
+    {props.photos ? (
+      <li className="nav-item d-flex border-bottom py-3">
+        <Link to={`/photos/${props.product}`}>
+          <div>
+            <img
+              className="img-thumbnail side-image mx-3"
+              src={props.photos[0].source}
+              alt={props.product}
+            />
+            Gallery
+          </div>
+        </Link>
+      </li>
+    ) : (
+      <Link to="/gallery">Gallery </Link>
+    )}
+
+    {props.photos ? (
+      <li className="nav-item d-flex border-bottom py-3">
+        <Link to="/projects">
+          <div>
+            <img
+              className="img-thumbnail side-image mx-3"
+              src={props.photos[0].source}
+              alt="gallery"
+            />
+            Related Projects
+          </div>
+        </Link>
+      </li>
+    ) : (
+      <Spinner />
+    )}
+    {props.photos ? (
+      <li className="nav-item d-flex border-bottom py-3">
+        <Link to="/drawings">
+          <div>
+            <img
+              className="img-thumbnail side-image mx-3"
+              src={props.photos[0].source}
+              alt="gallery"
+            />
+            Related Drawings
+          </div>
+        </Link>
+      </li>
+    ) : (
+      <Spinner />
+    )}
   </ul>
 );
 

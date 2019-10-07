@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import GalleryProduct from "../components/GalleryProduct/GalleryProduct";
 
 class DrawingsPage extends Component {
   render() {
-    return <GalleryProduct />;
+    return (
+      <div className="container">
+        <h1 className="display-3 text-center m-5">Drawings</h1>
+      </div>
+    );
   }
 }
 

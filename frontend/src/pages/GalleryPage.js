@@ -45,6 +45,7 @@ class GalleryPage extends Component {
   render() {
     return (
       <div className="container">
+        <h1 className="display-3 text-center m-5">Gallery</h1>
         {this.state.isLoading ? (
           <Spinner />
         ) : (

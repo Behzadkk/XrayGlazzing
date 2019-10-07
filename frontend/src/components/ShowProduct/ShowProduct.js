@@ -30,8 +30,13 @@ const ShowProduct = props => {
           </div>
           <div className="col-md-3 my-5">
             <aside className="sidebar">
-              <h4 className="heading-primary">{props.product.subCat}</h4>
-              <ProductSidebar photos={props.photos.photos} />
+              <h4 className="heading-primary">
+                {captialize(props.product.subCat)}
+              </h4>
+              <ProductSidebar
+                photos={props.photos.photos}
+                product={props.product.subCat}
+              />
             </aside>
           </div>
         </div>

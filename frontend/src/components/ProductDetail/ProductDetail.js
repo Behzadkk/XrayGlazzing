@@ -8,7 +8,7 @@ const ProductDetail = props => {
           {props.product.mainPhotos.length > 1 && (
             <img
               className="img-thumbnail float-left m-3 detail-photo"
-              src={props.product.mainPhotos[1]}
+              src={props.product.mainPhotos[0]}
               alt={props.product.subCat}
             />
           )}

@@ -18,7 +18,6 @@ class ProductsPage extends Component {
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
     this.fetchProduct();
   }
 

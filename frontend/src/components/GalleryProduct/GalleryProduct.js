@@ -75,6 +75,7 @@ class GalleryProduct extends Component {
   render() {
     return (
       <div className="gallery-container">
+        <h2 className="display-4 text-center m-5">Gallery</h2>
         <div className="gallery-grid">
           {this.state.images.map(this.renderImageContent)}
         </div>
