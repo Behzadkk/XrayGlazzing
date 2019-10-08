@@ -28,7 +28,7 @@ class ShowProject extends Component {
   };
   confirmEdit = e => {
     e.preventDefault();
-    console.log(`http://localhost:5000/api/projects/${this.props.project._id}`);
+    console.log(`/api/projects/${this.props.project._id}`);
     console.log(this.state);
     const name = this.projectEl.current.value;
     const description = this.projDescEl.current.value;
@@ -36,7 +36,7 @@ class ShowProject extends Component {
     const photos = this.state.photos;
     const requestBody = { name, description, products, photos };
 
-    fetch(`http://localhost:5000/api/projects/${this.props.project._id}`, {
+    fetch(`/api/projects/${this.props.project._id}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),
       headers: {
