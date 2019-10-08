@@ -27,12 +27,19 @@ class AdminsPage extends Component {
     console.log(images);
     console.log(this.state.images);
   };
+  slug = words => {
+    return words
+      .split(" ")
+      .map(w => w.toLowerCase())
+      .join("_");
+  };
   confirmProduct = () => {
-    const subCat = this.subCatEl.current.value;
+    const name = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
     const description = this.descEl.current.value;
+    const subCat = this.slug(name);
     const mainPhotos = [...this.state.images];
-    const product = { subCat, group, description, mainPhotos };
+    const product = { name, subCat, group, description, mainPhotos };
     const requestBody = { ...product };
     fetch("/api/products", {
       method: "POST",
@@ -47,7 +54,7 @@ class AdminsPage extends Component {
         }
         return res.json();
       })
-      //   .then(resData => alert(resData.toString() + "added to databe"))
+      .then(resData => alert(resData.toString() + "added to databe"))
       .catch(err => {
         console.log(err);
       });

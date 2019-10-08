@@ -11,7 +11,10 @@ const Carousel = props => {
     >
       <div className="carousel-inner">
         {props.photos.map((photo, i) => (
-          <div className={i === 1 ? "carousel-item active" : "carousel-item"}>
+          <div
+            key={i}
+            className={i === 1 ? "carousel-item active" : "carousel-item"}
+          >
             <img className="d-block w-100" src={photo.source} alt="" />
           </div>
         ))}

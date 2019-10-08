@@ -32,6 +32,8 @@ class App extends Component {
         return res.json();
       })
       .then(resData => {
+        console.log(resData);
+
         this.setState({ products: resData.products, isLoading: false });
       })
       .catch(err => {

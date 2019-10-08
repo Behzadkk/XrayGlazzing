@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -10,11 +11,19 @@ const apiRouter = require("./api");
 const helper = require("./helper/helper");
 const formData = require("express-form-data");
 
-mongoose.connect("mongodb://localhost:27017/xray_glazzing", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-});
+mongoose
+  .connect(
+    `mongodb+srv://xrayDeveloper:${process.env.MONGODB_PASS}@cluster0-afjtw.mongodb.net/Xray_Glazing?retryWrites=true&w=majority`,
+    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+  )
+  .then(() => console.log("connected to mongo server"))
+  .catch(err => console.log(err.message));
+
+// mongoose.connect("mongodb://localhost:27017/xray_glazzing", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false
+// });
 
 // handle HTTP POST requests
 app.use(bodyParser.json());
