@@ -25,7 +25,7 @@ let navbarData = {
   ],
   Doors: [
     {
-      name: "Aluminium Bi-fold Doors",
+      name: "Aluminium Bifold Doors",
       link: "aluminium_bifold_doors"
     },
     {
@@ -37,8 +37,8 @@ let navbarData = {
       link: "aluminium_sliding_doors"
     },
     {
-      name: "Steel Crittal Doors",
-      link: "steel_crittal_doors"
+      name: "Steel Heritage Doors",
+      link: "steel_heritage_doors"
     },
     {
       name: "UPVC French Doors",
@@ -68,7 +68,7 @@ let navbarData = {
     },
     {
       name: "Splash Back",
-      link: "spalsh_back"
+      link: "splash_back"
     },
     {
       name: "Mirrors",

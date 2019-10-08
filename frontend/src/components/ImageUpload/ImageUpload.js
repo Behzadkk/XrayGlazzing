@@ -15,7 +15,7 @@ class ImageUpload extends React.Component {
     e.preventDefault();
 
     const category = this.catEl.current.value;
-    const source = "/images/" + this.state.savedFile;
+    const source = this.state.savedFile;
 
     const photo = { category, source };
     const requestBody = { ...photo };
@@ -52,7 +52,7 @@ class ImageUpload extends React.Component {
       body: formData
     })
       .then(res => res.json())
-      .then(res => this.setState({ savedFile: res[0] }));
+      .then(res => this.setState({ savedFile: res }));
 
     reader.onloadend = () => {
       this.setState({
