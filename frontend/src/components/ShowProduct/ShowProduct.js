@@ -40,12 +40,6 @@ const ShowProduct = props => {
             </aside>
           </div>
         </div>
-
-        {/* {props.product.mainPhotos.length > 0 && (
-          <div>
-            <CardDeck images={props.product.mainPhotos} />
-          </div>
-        )} */}
       </div>
     </div>
   );

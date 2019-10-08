@@ -24,7 +24,7 @@ const ProductSidebar = props => (
 
     {props.photos ? (
       <li className="nav-item d-flex border-bottom py-3">
-        <Link to="/projects">
+        <Link to={`/projects/${props.product}`}>
           <div>
             <img
               className="img-thumbnail side-image mx-3"

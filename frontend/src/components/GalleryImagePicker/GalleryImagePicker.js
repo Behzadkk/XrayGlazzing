@@ -22,7 +22,7 @@ class GalleryImagePicker extends Component {
     if (this.props.product) {
       endPoint = this.props.product.subCat;
     }
-    fetch("http://localhost:5000/api/gallery/" + endPoint)
+    fetch("/api/gallery/" + endPoint)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");

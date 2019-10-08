@@ -49,7 +49,7 @@ mongoose
 
 // handle HTTP POST requests
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, "frontend/build")));
+app.use(express.static(path.join(__dirname, "frontend/build")));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT, OPTIONS");
@@ -62,9 +62,9 @@ app.use((req, res, next) => {
 // seedDB();
 
 app.use(formData.parse());
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
+});
 app.use("/api", apiRouter);
 
 app.get("/", (req, res) => {
@@ -103,7 +103,7 @@ app.post("/image-upload", (req, res) => {
     .then(results => results[0].secure_url)
     .then(url => res.json(url));
 });
-
-app.listen(5000, () => {
-  console.log("Xray server started at port 5000");
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log("Xray server started at port " + port);
 });

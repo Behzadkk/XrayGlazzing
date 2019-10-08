@@ -19,9 +19,7 @@ class GalleryProduct extends Component {
   }
   fetchImages = () => {
     this.setState({ isLoading: true });
-    fetch(
-      "http://localhost:5000/api/gallery/" + this.props.match.params.product
-    )
+    fetch("/api/gallery/" + this.props.match.params.product)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");

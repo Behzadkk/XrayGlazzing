@@ -24,6 +24,7 @@ router.put("/drawings/:id", drawingController.editADrawing);
 router.delete("/drawings/:id", drawingController.deleteADrawing);
 
 router.get("/projects", projectController.getAllProjects);
+router.get("/projects/:productType", projectController.getProjects);
 router.post("/projects", projectController.uploadAProject);
 router.put("/projects/:id", projectController.editAProject);
 router.delete("/projects/:id", projectController.deleteAProject);

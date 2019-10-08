@@ -25,7 +25,7 @@ class GalleryPage extends Component {
 
   fetchGallery = () => {
     this.setState({ isLoading: true });
-    fetch("http://localhost:5000/api/gallery")
+    fetch("/api/gallery")
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");

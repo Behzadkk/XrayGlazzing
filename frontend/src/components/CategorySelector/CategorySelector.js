@@ -27,6 +27,7 @@ class CategorySelector extends Component {
               <option>Loading from database</option>
             ) : (
               <React.Fragment>
+                <option value="">None</option>
                 {this.state.categories.map((product, i) => (
                   <Options product={product} key={i} />
                 ))}

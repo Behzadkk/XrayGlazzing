@@ -25,8 +25,9 @@ class ProjectsPage extends Component {
     this.setState({ selectedProject: null });
   };
   fetchProjects = () => {
+    const endpoint = this.props.match.params.product || "";
     this.setState({ isLoading: true });
-    fetch("http://localhost:5000/api/projects")
+    fetch("/api/projects/" + endpoint)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");

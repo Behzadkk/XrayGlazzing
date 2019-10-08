@@ -24,7 +24,7 @@ class App extends Component {
 
   fetchProduct = () => {
     this.setState({ isLoading: true });
-    fetch(`http://localhost:5000/api/products`)
+    fetch(`/api/products`)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");
@@ -76,11 +76,11 @@ class App extends Component {
                   path="/photos/:product"
                   render={props => <GalleryProduct {...props} />}
                 />
-                {/* <Route
-                  path="/project/:project"
-                  render={props => <GalleryProduct {...props} api="project" />}
-                /> */}
-                <Route path="/projects" component={ProjectsPage} />
+                <Route path="/projects" component={ProjectsPage} exact />
+                <Route
+                  path="/projects/:product"
+                  render={props => <ProjectsPage {...props} />}
+                />
                 <Route path="/drawings" component={DrawingsPage} />
                 <Route path="/about" component={AboutUsPage} />
                 <Route path="/admin" component={AdminsPage} />

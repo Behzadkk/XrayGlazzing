@@ -7,6 +7,7 @@ class ShowProject extends Component {
     super(props);
     this.projectEl = React.createRef();
     this.projDescEl = React.createRef();
+    this.categoryEl = React.createRef();
     this.state = {
       isEditing: false,
       photos: []
@@ -31,8 +32,9 @@ class ShowProject extends Component {
     console.log(this.state);
     const name = this.projectEl.current.value;
     const description = this.projDescEl.current.value;
+    const products = this.categoryEl.current.value;
     const photos = this.state.photos;
-    const requestBody = { name, description, photos };
+    const requestBody = { name, description, products, photos };
 
     fetch(`http://localhost:5000/api/projects/${this.props.project._id}`, {
       method: "PUT",
@@ -86,6 +88,7 @@ class ShowProject extends Component {
             onConfirm={this.confirmEdit}
             projectInput={this.projectEl}
             projDescInput={this.projDescEl}
+            categoryInput={this.categoryEl}
             selectedImages={this.imageHandler}
           />
         )}

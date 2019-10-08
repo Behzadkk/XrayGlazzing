@@ -39,7 +39,7 @@ class ProductsPage extends Component {
 
   fetchProduct = () => {
     this.setState({ isLoading: true });
-    fetch(`http://localhost:5000/api/products/${this.props.selectedProduct}`)
+    fetch(`/api/products/${this.props.selectedProduct}`)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");
@@ -72,9 +72,7 @@ class ProductsPage extends Component {
   };
   confirmEdit = e => {
     e.preventDefault();
-    console.log(
-      `http://localhost:5000/api/products/${this.props.selectedProduct}`
-    );
+
     const subCat = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
     const description = this.descEl.current.value;
@@ -82,7 +80,7 @@ class ProductsPage extends Component {
     const product = { subCat, group, description, mainPhotos };
     const requestBody = { ...product };
     console.log(requestBody);
-    fetch(`http://localhost:5000/api/products/${this.props.selectedProduct}`, {
+    fetch(`/api/products/${this.props.selectedProduct}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),
       headers: {
