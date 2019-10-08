@@ -20,7 +20,7 @@ class ImageUpload extends React.Component {
     const photo = { category, source };
     const requestBody = { ...photo };
     console.log(requestBody);
-    fetch("http://localhost:5000/api/gallery", {
+    fetch("/api/gallery", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
@@ -47,7 +47,7 @@ class ImageUpload extends React.Component {
 
     const formData = new FormData();
     formData.append("myFile", file);
-    fetch(`http://localhost:5000/image-upload`, {
+    fetch(`/image-upload`, {
       method: "POST",
       body: formData
     })

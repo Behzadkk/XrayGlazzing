@@ -4,7 +4,7 @@ import Options from "../Options/Options";
 class CategorySelector extends Component {
   state = { isLoading: true, categories: [] };
   componentDidMount() {
-    fetch("http://localhost:5000/api/products")
+    fetch("/api/products")
       .then(res => res.json())
       .then(res => {
         this.setState({ isLoading: false, categories: res.products });
