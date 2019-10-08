@@ -60,12 +60,11 @@ app.use((req, res, next) => {
   next();
 });
 // seedDB();
-
+app.use("/api", apiRouter);
 app.use(formData.parse());
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
 });
-app.use("/api", apiRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello Xray");
