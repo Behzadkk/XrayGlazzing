@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import Hero from "../components/Hero/Hero";
-import Cards from "../components/Cards/Cards";
 import Featurette from "../components/Featurette/Featurette";
 
 class LandingPage extends Component {
@@ -10,8 +9,7 @@ class LandingPage extends Component {
       <div>
         <Carousel photos={photos} />
         <Hero />
-        <Cards />
-        <Featurette />
+        <Featurette products={this.props.products} />
       </div>
     );
   }
@@ -22,10 +20,22 @@ export default LandingPage;
 const photos = [
   {
     source:
-      "https://cdn.pixabay.com/photo/2015/05/15/14/21/architecture-768432_960_720.jpg"
+      "https://res.cloudinary.com/dadhpknsf/image/upload/v1570612420/qki1vcaekz0vhtea8kdo.jpg"
   },
   {
     source:
-      "https://cdn.pixabay.com/photo/2013/04/11/19/46/louvre-102840_960_720.jpg"
+      "https://res.cloudinary.com/dadhpknsf/image/upload/v1570612431/syrc3kf5zjumok957ukq.jpg"
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dadhpknsf/image/upload/v1570612438/pkhyx5zagnn4ioep92l9.jpg"
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dadhpknsf/image/upload/v1570612533/x50reayn8hw23w4ua73v.jpg"
+  },
+  {
+    source:
+      "https://res.cloudinary.com/dadhpknsf/image/upload/v1570612407/mdkpifmrcionjjhm01ai.jpg"
   }
 ];

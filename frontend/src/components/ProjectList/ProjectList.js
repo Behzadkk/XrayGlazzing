@@ -26,10 +26,3 @@ const ProjectList = props => {
 };
 
 export default ProjectList;
-
-function captialize(words) {
-  return words
-    .split("_")
-    .map(w => w.substring(0, 1).toUpperCase() + w.substring(1))
-    .join(" ");
-}

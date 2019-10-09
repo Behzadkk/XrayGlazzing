@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutUs = () => (
   <div className="row featurette">
-    <div className="col-md-7">
+    <div className="col-md-7 order-md-2">
       <h2 className="featurette-heading">ABOUT US</h2>
       <p className="lead">
         We specialise in the supply and installation of custom made sliding
@@ -12,10 +12,10 @@ const AboutUs = () => (
         glazing solutions.
       </p>
     </div>
-    <div className="col-md-5">
+    <div className="col-md-5 order-md-1">
       <img
         className="w-100"
-        src="https://cdn.pixabay.com/photo/2017/04/24/13/37/architecture-2256489_960_720.jpg"
+        src="https://res.cloudinary.com/dadhpknsf/image/upload/v1570612521/blq1rks4kalexrfwh4gf.jpg"
         alt="about xray glazing"
       />
     </div>

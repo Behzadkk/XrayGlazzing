@@ -32,8 +32,6 @@ class App extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
-
         this.setState({ products: resData.products, isLoading: false });
       })
       .catch(err => {
@@ -59,7 +57,11 @@ class App extends Component {
           ) : (
             <div>
               <Switch>
-                <Route path="/" component={LandingPage} exact />
+                <Route
+                  path="/"
+                  render={() => <LandingPage products={this.state.products} />}
+                  exact
+                />
                 <Route
                   path="/products/"
                   render={() => (

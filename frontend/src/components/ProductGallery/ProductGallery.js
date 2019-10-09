@@ -15,9 +15,9 @@ class ProductGallery extends React.Component {
   findPhotos = () => {
     const images = [];
     this.props.photos.map(photo => {
-      images.push({ original: photo.source, thumbnail: photo.source });
+      return images.push({ original: photo.source, thumbnail: photo.source });
     });
-    this.setState({ images });
+    return this.setState({ images });
   };
   render() {
     return <ImageGallery items={this.state.images} />;

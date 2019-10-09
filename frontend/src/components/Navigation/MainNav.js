@@ -5,22 +5,24 @@ import "./MainNav.css";
 import DropDown from "./DropDown/DropDown";
 
 const MainNavigation = props => (
-  <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+  <nav className="navbar navbar-expand-lg bg-black">
     <div className="container">
       <Link className="navbar-brand" to="/">
-        XRAY
+        <img src="/xray-logo.jpg" alt="xray-glazing" className="brand" />
       </Link>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler navbar-dark"
         type="button"
         data-toggle="collapse"
+        data-target="#navbarsExample05"
+        aria-controls="navbarsExample05"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse">
+      <div className="collapse navbar-collapse" id="navbarsExample05">
         <ul className="navbar-nav mr-auto">
           <DropDown
             products={props.navbarData.Rooflights}
@@ -59,7 +61,7 @@ const MainNavigation = props => (
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/about">
-              About
+              About Us
             </Link>
           </li>
         </ul>

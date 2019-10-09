@@ -33,7 +33,6 @@ class GalleryPage extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData.photos);
         this.setState({ isLoading: false });
       })
       .catch(err => {

@@ -1,5 +1,4 @@
 import React from "react";
-import Carousel from "../Carousel/Carousel";
 import Spinner from "../Spinner/Spinner";
 import { Link } from "react-router-dom";
 

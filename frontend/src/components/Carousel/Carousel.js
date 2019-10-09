@@ -2,7 +2,6 @@ import React from "react";
 import "./Carousel.css";
 
 const Carousel = props => {
-  console.log(props.photos);
   return (
     <div
       id="carouselExampleControls"

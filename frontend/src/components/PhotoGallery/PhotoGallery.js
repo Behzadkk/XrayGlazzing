@@ -6,7 +6,7 @@ const PhotoGallery = props => {
     <div className="card-group">
       {props.products.map((product, i) => (
         <div key={i} className="col-sm-6 col-xl-4  px-0 mb-4 d-flex">
-          <div className="card">
+          <div className="card mr-2">
             <img
               className="card-img-top height-inherit"
               src={product.mainPhotos[0]}
@@ -18,7 +18,6 @@ const PhotoGallery = props => {
                   {captialize(product.subCat)}
                 </h5>
               </Link>
-              <p>Xray Glazing</p>
             </div>
           </div>
         </div>

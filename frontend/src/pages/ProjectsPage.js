@@ -35,7 +35,6 @@ class ProjectsPage extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData.projects);
         this.setState({ isLoading: false, projects: resData.projects });
       })
       .catch(err => {

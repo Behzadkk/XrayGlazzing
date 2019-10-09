@@ -8,7 +8,7 @@ const Footer = () => (
     <MDBFooter className="font-small pt-4 mt-4">
       <MDBContainer fluid className="container text-center text-md-left">
         <MDBRow>
-          <MDBCol md="3" sm="6" className="d-none d-sm-block text-left">
+          <MDBCol md="3" sm="6" className=" text-left">
             <h5 className="title">Menu</h5>
             <ul className="pl-2">
               <li className="list-unstyled">
@@ -31,7 +31,7 @@ const Footer = () => (
               </li>
             </ul>
           </MDBCol>
-          <MDBCol md="3" sm="6" className="d-none d-sm-block text-left">
+          <MDBCol md="3" sm="6" className="text-left">
             <h5 className="title">Useful Links</h5>
             <ul className="pl-2">
               <li className="list-unstyled">
@@ -65,7 +65,7 @@ const Footer = () => (
               </li>
             </ul>
           </MDBCol>
-          <MDBCol md="3" sm="6" className="d-none d-sm-block text-left">
+          <MDBCol md="3" sm="6" className="text-left">
             <h5 className="title">Contact Info</h5>
             <ul className="pl-2">
               <li className="list-unstyled">

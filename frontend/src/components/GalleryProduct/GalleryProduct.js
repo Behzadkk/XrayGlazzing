@@ -124,7 +124,7 @@ class GalleryModal extends Component {
         <div className="modal">
           <div className="modal-body">
             <a
-              href=""
+              href="#"
               className="modal-close"
               onClick={closeModal}
               onKeyDown={this.handleKeyDown}
@@ -133,7 +133,7 @@ class GalleryModal extends Component {
             </a>
             {hasPrev && (
               <a
-                href=""
+                href="#"
                 className="modal-prev"
                 onClick={findPrev}
                 onKeyDown={this.handleKeyDown}
@@ -143,7 +143,7 @@ class GalleryModal extends Component {
             )}
             {hasNext && (
               <a
-                href=""
+                href="#"
                 className="modal-next"
                 onClick={findNext}
                 onKeyDown={this.handleKeyDown}
