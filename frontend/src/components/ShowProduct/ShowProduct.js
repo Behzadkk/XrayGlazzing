@@ -3,22 +3,19 @@ import React from "react";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import ProductGallery from "../ProductGallery/ProductGallery";
 import ProductSidebar from "../ProductSidebar/ProductSidebar";
+import "./ShowProduct.css";
 
 const ShowProduct = props => {
+  const bannerBackground = {
+    backgroundImage: `url(${props.product.mainPhotos[0]})`
+  };
   return (
     <div>
-      <div className="jumbotron jumbotron-fluid">
-        {props.product.mainPhotos.length > 0 && (
-          <img
-            className="img-fluid my-banner"
-            src={props.product.mainPhotos[0]}
-            alt={props.product.subCat}
-          />
-        )}
-        <div className="container">
-          <h1 className="display-4"> {captialize(props.product.subCat)}</h1>
-          <p className="lead">Supplied by XRAY GLAZING</p>
+      <div className="">
+        <div className="banner text-center" style={bannerBackground}>
+          <h1 className="d-none"> {props.product.name}</h1>
         </div>
+        <h1 className="text-center m-5"> {props.product.name.toUpperCase()}</h1>
       </div>
       <div className="container">
         <div className="row">
@@ -27,17 +24,19 @@ const ShowProduct = props => {
             <div className="check">
               <ProductGallery photos={props.photos.photos} />
             </div>
+            <div>
+              <h3>{props.product.subHeading}</h3>
+            </div>
           </div>
           <div className="col-md-3 my-5">
             <aside className="sidebar">
-              <h4 className="heading-primary">
-                {captialize(props.product.subCat)}
-              </h4>
+              <h4 className="heading-primary">{props.product.name}</h4>
               <ProductSidebar
                 photos={props.photos.photos}
-                product={props.product.subCat}
+                product={props.product}
               />
             </aside>
+            <div className="mt-4">{props.product.moreInfo}</div>
           </div>
         </div>
       </div>
@@ -46,10 +45,3 @@ const ShowProduct = props => {
 };
 
 export default ShowProduct;
-
-function captialize(words) {
-  return words
-    .split("_")
-    .map(w => w.substring(0, 1).toUpperCase() + w.substring(1))
-    .join(" ");
-}

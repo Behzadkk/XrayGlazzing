@@ -5,14 +5,51 @@ const ProductDetail = props => {
     <div className="row">
       <div className="col-md-12">
         <div className="my-5">
-          {props.product.mainPhotos.length > 1 && (
-            <img
-              className="img-thumbnail float-left m-3 detail-photo"
-              src={props.product.mainPhotos[0]}
-              alt={props.product.subCat}
-            />
-          )}
-          <p className="">{props.product.description}</p>
+          <div id="exTab2">
+            <ul className="nav nav-tabs">
+              <li className="nav-item">
+                <a
+                  href="#description"
+                  data-toggle="tab"
+                  className="nav-link active"
+                >
+                  Descriptions
+                </a>
+              </li>
+              {props.product.keyFeatures && (
+                <li className="nav-item">
+                  <a href="#ketFeatures" data-toggle="tab" className="nav-link">
+                    Key Features
+                  </a>
+                </li>
+              )}
+              {props.product.moreDetails && (
+                <li className="nav-item">
+                  <a href="#moreDetails" data-toggle="tab" className="nav-link">
+                    More Details
+                  </a>
+                </li>
+              )}
+            </ul>
+            <div className="tab-content product-tabs">
+              <div className="tab-pane active" id="description">
+                {props.product.mainPhotos.length > 1 && (
+                  <img
+                    className="img-thumbnail float-left mr-3 detail-photo"
+                    src={props.product.mainPhotos[0]}
+                    alt={props.product.subCat}
+                  />
+                )}
+                <p className="">{props.product.description}</p>
+              </div>
+              <div className="tab-pane" id="ketFeatures">
+                <p>{props.product.keyFeatures}</p>
+              </div>
+              <div className="tab-pane" id="moreDetails">
+                <p>{props.product.moreDetails}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

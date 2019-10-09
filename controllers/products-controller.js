@@ -29,23 +29,12 @@ exports.getAProduct = (req, res) => {
         console.log(err);
       } else {
         products.push({ photos });
-        console.log(foundProduct);
         res.status(200).json({
           products: products
         });
       }
     });
   });
-
-  // Product.find({ subCat: productType }, function(err, products) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     res.status(200).json({
-  //       products: products
-  //     });
-  //   }
-  // });
 };
 
 exports.createAProduct = (req, res) => {
@@ -65,16 +54,12 @@ exports.createAProduct = (req, res) => {
 exports.editAProduct = async (req, res) => {
   try {
     const editingProduct = req.body;
-    console.log("editingproduct", editingProduct);
     const productType = req.params.productType;
-    console.log("product type", productType);
     const updatedProduct = await Product.findOneAndUpdate(
       { subCat: productType },
       editingProduct
     );
     updatedProduct.save();
-
-    console.log("updated product", updatedProduct);
     res.status(200).json({
       updatedProduct: updatedProduct
     });

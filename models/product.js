@@ -8,6 +8,10 @@ const productSchema = new mongoose.Schema({
   subCat: String,
   name: String,
   description: String,
+  keyFeatures: String,
+  moreInfo: String,
+  subHeading: String,
+  moreDetails: String,
   mainPhotos: [],
   drawings: [
     {

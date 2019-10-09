@@ -15,6 +15,10 @@ class ProductsPage extends Component {
     this.subCatEl = React.createRef();
     this.groupEl = React.createRef();
     this.descEl = React.createRef();
+    this.keyFeatureEl = React.createRef();
+    this.moreInfoEl = React.createRef();
+    this.subHeadEl = React.createRef();
+    this.moreDetailsEl = React.createRef();
   }
 
   componentDidMount() {
@@ -48,6 +52,7 @@ class ProductsPage extends Component {
       })
       .then(resData => {
         this.setState({ product: resData.products, isLoading: false });
+        console.log(resData);
       })
       .catch(err => {
         console.log(err);
@@ -74,8 +79,21 @@ class ProductsPage extends Component {
     const subCat = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
     const description = this.descEl.current.value;
+    const keyFeatures = this.keyFeatureEl.current.value;
+    const moreInfo = this.moreInfoEl.current.value;
+    const subHeading = this.subHeadEl.current.value;
+    const moreDetails = this.moreDetailsEl.current.value;
     const mainPhotos = this.state.mainPhotos;
-    const product = { subCat, group, description, mainPhotos };
+    const product = {
+      subCat,
+      group,
+      description,
+      keyFeatures,
+      moreInfo,
+      subHeading,
+      moreDetails,
+      mainPhotos
+    };
     const requestBody = { ...product };
     console.log(requestBody);
     fetch(`/api/products/${this.props.selectedProduct}`, {
@@ -121,6 +139,10 @@ class ProductsPage extends Component {
             subCatInput={this.subCatEl}
             groupInput={this.groupEl}
             descInput={this.descEl}
+            keyFeatureInput={this.keyFeatureEl}
+            moreInfoInput={this.moreInfoEl}
+            subHeadInput={this.subHeadEl}
+            moreDetailsInput={this.moreDetailsEl}
             selectedImages={this.selecImageHandler}
           />
         )}

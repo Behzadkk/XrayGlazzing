@@ -59,6 +59,65 @@ const EditProduct = props => (
               ></textarea>
             </div>
           </div>
+          <div className="form-group row justify-content-between">
+            <label className="my-2 mx-3" htmlFor="keyFeatures">
+              Key Features
+            </label>
+            <div className="col-sm-9">
+              <textarea
+                className="form-control"
+                rows="4"
+                cols="50"
+                id="keyFeatures"
+                defaultValue={props.product.keyFeatures}
+                ref={props.keyFeatureInput}
+              ></textarea>
+            </div>
+          </div>
+          <div className="form-group row justify-content-between">
+            <label className="my-2 mx-3" htmlFor="moreInfo">
+              More Info
+            </label>
+            <div className="col-sm-9">
+              <textarea
+                className="form-control"
+                rows="4"
+                cols="50"
+                id="moreInfo"
+                defaultValue={props.product.moreInfo}
+                ref={props.moreInfoInput}
+              ></textarea>
+            </div>
+          </div>
+          <div className="form-group row justify-content-between">
+            <label className="my-2 mx-3" htmlFor="subHeading">
+              Sub Heading
+            </label>
+            <div className="col-sm-9">
+              <input
+                className="form-control"
+                type="text"
+                id="subHeading"
+                ref={props.subHeadInput}
+                value={props.product.subHeading}
+              />
+            </div>
+          </div>
+          <div className="form-group row justify-content-between">
+            <label className="my-2 mx-3" htmlFor="moreDetails">
+              More Details
+            </label>
+            <div className="col-sm-9">
+              <textarea
+                className="form-control"
+                rows="4"
+                cols="50"
+                id="moreDetails"
+                defaultValue={props.product.moreDetails}
+                ref={props.moreDetailsInput}
+              ></textarea>
+            </div>
+          </div>
 
           <div className="form-group row justify-content-between">
             <p className="my-2 mx-3">Select Main Phtos</p>

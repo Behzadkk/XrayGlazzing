@@ -20,7 +20,13 @@ class ProductGallery extends React.Component {
     return this.setState({ images });
   };
   render() {
-    return <ImageGallery items={this.state.images} />;
+    return (
+      <div>
+        {this.state.images.length > 0 && (
+          <ImageGallery items={this.state.images} />
+        )}
+      </div>
+    );
   }
 }
 
