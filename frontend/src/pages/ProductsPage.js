@@ -135,6 +135,7 @@ class ProductsPage extends Component {
         {this.state.isEditing && (
           <EditProduct
             product={this.state.product[0]}
+            photos={this.state.product[1].photos}
             onConfirm={this.confirmEdit}
             subCatInput={this.subCatEl}
             groupInput={this.groupEl}

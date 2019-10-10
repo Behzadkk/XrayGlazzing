@@ -125,6 +125,7 @@ const EditProduct = props => (
               <GalleryImagePicker
                 selectedImages={props.selectedImages}
                 product={props.product}
+                photos={props.photos}
               />
             </div>
           </div>

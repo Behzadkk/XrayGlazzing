@@ -1,5 +1,4 @@
 import React from "react";
-import Spinner from "../Spinner/Spinner";
 import { Link } from "react-router-dom";
 
 const ProductSidebar = props => (
@@ -23,7 +22,7 @@ const ProductSidebar = props => (
 
     {props.photos ? (
       <li className="nav-item d-flex border-bottom py-3">
-        <Link to={`/projects/${props.product.subCat}`}>
+        <Link to={`/${props.product.subCat}/projects`}>
           <div>
             <img
               className="img-thumbnail side-image mr-2"

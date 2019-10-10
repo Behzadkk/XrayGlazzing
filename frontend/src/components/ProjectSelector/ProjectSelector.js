@@ -1,37 +1,35 @@
 import React, { Component } from "react";
 import Options from "../Options/Options";
 
-class CategorySelector extends Component {
-  state = { isLoading: true, categories: [] };
+class ProjectSelector extends Component {
+  state = { isLoading: true, projects: [] };
   componentDidMount() {
-    fetch("/api/products")
+    fetch("/api/projects")
       .then(res => res.json())
       .then(res => {
-        this.setState({ isLoading: false, categories: res.products });
+        this.setState({ isLoading: false, projects: res.projects });
       });
-    console.log(this.props.category);
   }
 
   render() {
     return (
       <div className="form-group row justify-content-between">
         <label className="my-2 mx-3" htmlFor="selector">
-          Select a category
+          Select a project
         </label>
         <div className="col-sm-9">
           <select
             className="form-control"
             id="selector"
-            defaultValue={this.props.category}
-            ref={this.props.categoryInput}
+            ref={this.props.projectInput}
           >
             {this.state.isLoading ? (
               <option>Loading from database</option>
             ) : (
               <React.Fragment>
                 <option value="">None</option>
-                {this.state.categories.map((product, i) => (
-                  <Options category={product} key={i} />
+                {this.state.projects.map((project, i) => (
+                  <Options category={project} key={i} />
                 ))}
               </React.Fragment>
             )}
@@ -42,4 +40,4 @@ class CategorySelector extends Component {
   }
 }
 
-export default CategorySelector;
+export default ProjectSelector;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import CardDeck from "../CardsDeck/CardsDeck";
 import EditProject from "../EditProject/EditProject";
+import ProductGallery from "../ProductGallery/ProductGallery";
 
 class ShowProject extends Component {
   constructor(props) {
@@ -9,34 +9,52 @@ class ShowProject extends Component {
     this.projDescEl = React.createRef();
     this.categoryEl = React.createRef();
     this.state = {
+      isLoading: true,
       isEditing: false,
-      photos: []
+      photos: [],
+      projects: []
     };
+  }
+
+  componentDidMount() {
+    this.fetchProjects();
+  }
+
+  fetchProjects() {
+    this.setState({ isLoading: true });
+    fetch("/api/projects/" + this.props.match.params.id)
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res.json();
+      })
+      .then(resData => {
+        this.setState({ isLoading: false, projects: resData.projects });
+        console.log(resData);
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ isLoading: true });
+      });
   }
   editingProject = () => {
     this.setState(prevState => {
       return { isEditing: !prevState.isEditing };
     });
   };
-  imageHandler = list => {
-    const src = [];
-    list.map(item => {
-      src.push(item.src);
-      return src;
-    });
-    this.setState({ photos: src });
+  imageHandler = image => {
+    this.setState({ photos: image.src });
   };
   confirmEdit = e => {
     e.preventDefault();
-    console.log(`/api/projects/${this.props.project._id}`);
-    console.log(this.state);
     const name = this.projectEl.current.value;
     const description = this.projDescEl.current.value;
     const products = this.categoryEl.current.value;
     const photos = this.state.photos;
     const requestBody = { name, description, products, photos };
-
-    fetch(`/api/projects/${this.props.project._id}`, {
+    console.log(requestBody);
+    fetch(`/api/projects/${this.state.projects[0]._id}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),
       headers: {
@@ -56,35 +74,34 @@ class ShowProject extends Component {
   };
   render() {
     return (
-      <div>
-        <div className="modal-close" onClick={this.props.closeModal}>
-          Close
-        </div>
+      <div className="container">
+        {!this.state.isLoading && (
+          <div>
+            <h1 className="text-center m-5">
+              {this.state.projects[0].name.toUpperCase()}
+            </h1>
+            <div className="row">
+              <div className="col-md-9">
+                <div className="my-5">
+                  <p>{this.state.projects[0].description}</p>
+                </div>
+              </div>
+            </div>
+            <div className="check">
+              <ProductGallery photos={this.state.projects[1].photos} />
+            </div>
+          </div>
+        )}
         <button
-          className="btn btn-sm btn-warning float-right"
+          className="btn btn-sm btn-warning"
           onClick={this.editingProject}
         >
           Edit
         </button>
-        {!this.state.isEditing && (
-          <div>
-            <h1 className="display-4 text-center m-4">
-              {captialize(this.props.project.name)}
-            </h1>
-            <div className="my-5">
-              <p>{this.props.project.description}</p>
-            </div>
-            {this.props.project.photos.length > 0 && (
-              <div>
-                <CardDeck images={this.props.project.photos} />
-              </div>
-            )}
-          </div>
-        )}
-
         {this.state.isEditing && (
           <EditProject
-            project={this.props.project}
+            project={this.state.projects[0]}
+            photos={this.state.projects[1].photos}
             onConfirm={this.confirmEdit}
             projectInput={this.projectEl}
             projDescInput={this.projDescEl}

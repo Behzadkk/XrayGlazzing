@@ -41,11 +41,17 @@ const EditProject = props => {
               />
             </div>
           </div>
-          <CategorySelector categoryInput={props.categoryInput} />
+          <CategorySelector
+            categoryInput={props.categoryInput}
+            category={props.project.products[0]}
+          />
           <div className="form-group row justify-content-between">
-            <p className="my-2 mx-3">Select related Phtos</p>
+            <p className="my-2 mx-3">Select Main Photos</p>
             <div className="col-sm-9">
-              <GalleryImagePicker selectedImages={props.selectedImages} />
+              <GalleryImagePicker
+                selectedImages={props.selectedImages}
+                photos={props.photos}
+              />
             </div>
           </div>
           <div className="form-group row justify-content-end mt-5 mt-sm-0">

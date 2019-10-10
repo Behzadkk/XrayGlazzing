@@ -35,10 +35,6 @@ const NewProject = props => {
                 placeholder="Excepteur nostrud ipsum reprehenderit eu cillum aliquip mollit voluptate aute esse sint culpa magna ipsum."
                 ref={props.projDescInput}
               />
-              <p>
-                "You can add photos at editing section of projects. Please only
-                add project's name and description"
-              </p>
             </div>
           </div>
           <div className="form-group row justify-content-end mt-5 mt-sm-0">

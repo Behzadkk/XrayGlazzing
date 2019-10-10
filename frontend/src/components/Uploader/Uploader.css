@@ -1,23 +1,8 @@
-body {
-  font-family: Roboto, sans-serif;
-  background: #f2f2f2;
-  color: #757575;
-  margin: 0px;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: space-around;
-}
-
 .buttons {
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  height: 75vh;
 }
 
 .button {
@@ -35,7 +20,6 @@ body {
   right: 15px;
 }
 
-footer svg,
 .button svg,
 .delete svg {
   filter: drop-shadow(3px 3px 3px #999);
@@ -43,7 +27,6 @@ footer svg,
   transform: rotate(-0.2deg);
 }
 
-footer svg:hover,
 .button svg:hover,
 .delete svg:hover {
   filter: drop-shadow(4px 4px 4px #999);
@@ -55,11 +38,6 @@ footer svg:hover,
   filter: drop-shadow(1px 1px 1px #999);
 }
 
-footer svg {
-  filter: drop-shadow(1.5px 1px 1px #999);
-}
-
-footer svg:hover,
 .delete svg:hover {
   filter: drop-shadow(1.5px 1.5px 1.5px);
 }
@@ -69,9 +47,9 @@ input[type="file"] {
   position: absolute;
 }
 
-img {
-  max-height: 420px;
-  max-width: 420px;
+.img__upload {
+  max-height: 220px;
+  max-width: 220px;
   padding: 10px;
   border: 1px dashed #999;
 }
@@ -113,40 +91,6 @@ img {
   position: absolute;
 }
 
-/* Footer */
-footer {
-  display: flex;
-  justify-content: space-between;
-  width: 96vw;
-  margin: 0 2vw;
-}
-
-footer .small-button {
-  border-radius: 50%;
-  border: 1px solid #fff;
-  width: 3.2em;
-  height: 3.2em;
-  padding: 5px;
-  transition: 0.3s;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  text-align: center;
-}
-
-footer .small-button:hover {
-  background: #767676;
-  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.45);
-}
-
-footer .small-button.github {
-  background: #6e5494;
-}
-
-footer .small-button.medium {
-  background: #00ab6c;
-  font-size: 0.85em;
-  padding: 0.65em;
-}
-
 @keyframes pulse-colors {
   from {
     background: #c9c3e6;
@@ -170,15 +114,6 @@ footer .small-button.medium {
   to {
     opacity: 1;
   }
-}
-
-.spinner {
-  animation: spin 1.2s infinite linear;
-}
-
-.spinner svg {
-  background: #f2f2f2;
-  border-radius: 50%;
 }
 
 @-webkit-keyframes spin {

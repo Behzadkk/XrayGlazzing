@@ -14,6 +14,8 @@ import AboutUsPage from "./pages/AboutUsPage";
 import AdminsPage from "./pages/AdminsPage";
 import Spinner from "./components/Spinner/Spinner";
 import GalleryProduct from "./components/GalleryProduct/GalleryProduct";
+import Uploader from "./components/Uploader/Uploader";
+import ShowProject from "./components/ShowProject/ShowProject";
 
 class App extends Component {
   state = { selectedProduct: "", products: null, isLoading: true };
@@ -80,12 +82,17 @@ class App extends Component {
                 />
                 <Route path="/projects" component={ProjectsPage} exact />
                 <Route
-                  path="/projects/:product"
+                  path="/:product/projects"
                   render={props => <ProjectsPage {...props} />}
+                />
+                <Route
+                  path="/projects/:id"
+                  render={props => <ShowProject {...props} />}
                 />
                 <Route path="/drawings" component={DrawingsPage} />
                 <Route path="/about" component={AboutUsPage} />
                 <Route path="/admin" component={AdminsPage} />
+                <Route path="/upload" component={Uploader} />
               </Switch>
             </div>
           )}
