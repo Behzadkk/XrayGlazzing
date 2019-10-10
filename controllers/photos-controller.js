@@ -37,12 +37,14 @@ exports.getPhotos = (req, res) => {
   });
 };
 
-exports.uploadAPhoto = (req, res) => {
-  const newPhoto = req.body;
-  Photo.create(newPhoto, function(err, createdPhoto) {
+exports.uploadPhotos = (req, res) => {
+  const newPhotos = req.body;
+  Photo.insertMany(newPhotos, function(err, createdPhoto) {
     if (err) {
       console.log(err);
     } else {
+      console.log(newPhotos);
+      console.log(createdPhoto);
       res.status(200).json({
         createdPhoto: createdPhoto
       });

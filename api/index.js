@@ -14,7 +14,7 @@ router.delete("/products/:productType", productController.deleteAProduct);
 
 router.get("/gallery", photoController.getAllPhotos);
 router.get("/gallery/:productType", photoController.getPhotos);
-router.post("/gallery", photoController.uploadAPhoto);
+router.post("/gallery", photoController.uploadPhotos);
 router.put("/gallery/:id", photoController.editAPhoto);
 router.delete("/gallery/:id", photoController.deleteAPhoto);
 
@@ -24,7 +24,8 @@ router.put("/drawings/:id", drawingController.editADrawing);
 router.delete("/drawings/:id", drawingController.deleteADrawing);
 
 router.get("/projects", projectController.getAllProjects);
-router.get("/projects/:productType", projectController.getProjects);
+router.get("/:productType/projects", projectController.getProjects);
+router.get("/projects/:id", projectController.showAProject);
 router.post("/projects", projectController.uploadAProject);
 router.put("/projects/:id", projectController.editAProject);
 router.delete("/projects/:id", projectController.deleteAProject);

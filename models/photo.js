@@ -6,6 +6,10 @@ const photoSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product"
   },
+  project: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project"
+  },
   likes: {
     type: Number,
     default: 0

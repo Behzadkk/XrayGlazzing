@@ -41,11 +41,14 @@ mongoose
   .then(() => console.log("connected to mongo server"))
   .catch(err => console.log(err.message));
 
-// mongoose.connect("mongodb://localhost:27017/xray_glazzing", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false
-// });
+// mongoose
+//   .connect("mongodb://localhost:27017/xray_glazzing", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+//   })
+//   .then(() => console.log("connected to local mongo server"))
+//   .catch(err => console.log(err.message));
 
 // handle HTTP POST requests
 app.use(bodyParser.json());
@@ -62,12 +65,13 @@ app.use((req, res, next) => {
 // seedDB();
 app.use("/api", apiRouter);
 app.use(formData.parse());
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
-});
 
 app.get("/", (req, res) => {
   res.send("Hello Xray");
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
 });
 
 // app.post("/image-upload", (req, res) => {
@@ -98,9 +102,7 @@ app.post("/image-upload", (req, res) => {
   const values = Object.values(req.files);
   const promises = values.map(image => cloudinary.uploader.upload(image.path));
 
-  Promise.all(promises)
-    .then(results => results[0].secure_url)
-    .then(url => res.json(url));
+  Promise.all(promises).then(results => res.json(results));
 });
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

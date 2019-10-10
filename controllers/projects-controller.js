@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Project = require("../models/project");
 const Product = require("../models/product");
+const Photo = require("../models/photo");
 
 exports.getAllProjects = (req, res) => {
   Project.find({}, function(err, projects) {
@@ -28,6 +29,26 @@ exports.getProjects = async (req, res) => {
   }
 };
 
+exports.showAProject = (req, res) => {
+  let projects = [];
+  Project.findById(req.params.id, function(err, foundProject) {
+    if (err) {
+      console.log(err);
+    }
+    projects.push(foundProject);
+    Photo.find({ project: foundProject._id }, function(err, photos) {
+      if (err) {
+        console.log(err);
+      } else {
+        projects.push({ photos });
+        res.status(200).json({
+          projects: projects
+        });
+      }
+    });
+  });
+};
+
 exports.uploadAProject = async (req, res) => {
   try {
     const newProject = req.body;
@@ -47,11 +68,12 @@ exports.editAProject = async (req, res) => {
     const id = req.params.id;
     const updatedProject = await Project.findByIdAndUpdate(id, editingProject);
     updatedProject.save();
-    if (updatedProject.products[0]) {
-      const editingProduct = await Product.findById(updatedProject.products[0]);
-      editingProduct.projects.push(updatedProject._id);
-      editingProduct.save();
-    }
+    console.log("UPDATING PRODUCT" + updatedProject.products[0]);
+    // if (updatedProject.products[0]) {
+    //   const editingProduct = await Product.findById(updatedProject.products[0]);
+    //   editingProduct.projects.push(updatedProject._id);
+    //   editingProduct.save();
+    // }
 
     res.status(200).json({
       updatedProject: updatedProject
