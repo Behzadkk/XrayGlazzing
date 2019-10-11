@@ -8,7 +8,6 @@ const DropDown = props => {
         key={i}
         to={"/products/" + product.link}
         className="dropdown-item"
-        onClick={props.onSelect.bind(this, product.link)}
       >
         {product.name}
       </NavLink>

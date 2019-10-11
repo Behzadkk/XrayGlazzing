@@ -33,7 +33,7 @@ const ProductDetail = props => {
             </ul>
             <div className="tab-content product-tabs">
               <div className="tab-pane active" id="description">
-                {props.product.mainPhotos.length > 1 && (
+                {props.product.mainPhotos[0] && (
                   <img
                     className="img-thumbnail float-left mr-3 detail-photo"
                     src={props.product.mainPhotos[0]}

@@ -7,7 +7,7 @@ import "./ShowProduct.css";
 
 const ShowProduct = props => {
   const bannerBackground = {
-    backgroundImage: `url(${props.product.mainPhotos[0]})`
+    backgroundImage: `url(${props.product.banner[0]})`
   };
   return (
     <div>

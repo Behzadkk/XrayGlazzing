@@ -68,7 +68,7 @@ class GalleryImagePicker extends Component {
           type="button"
           onClick={() => this.props.selectedImages(this.state.image)}
         >
-          Define Main the photo for this group
+          Confirm the photo
         </button>
       </div>
     );

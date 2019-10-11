@@ -42,18 +42,11 @@ class App extends Component {
       });
   };
 
-  selectHandler = link => {
-    this.setState({ selectedProduct: link });
-  };
-
   render() {
     return (
       <div className="App">
         <BrowserRouter>
-          <MainNavigation
-            navbarData={navbarData}
-            onSelection={this.selectHandler}
-          />
+          <MainNavigation navbarData={navbarData} />
           {this.state.isLoading ? (
             <Spinner />
           ) : (
@@ -65,11 +58,9 @@ class App extends Component {
                   exact
                 />
                 <Route
-                  path="/products/"
-                  render={() => (
-                    <ProductsPage
-                      selectedProduct={this.state.selectedProduct}
-                    />
+                  path="/products/:product"
+                  render={props => (
+                    <ProductsPage {...props} products={this.state.products} />
                   )}
                 />
                 <Route

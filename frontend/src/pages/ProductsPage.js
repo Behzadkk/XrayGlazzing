@@ -10,7 +10,9 @@ class ProductsPage extends Component {
       isLoading: true,
       product: null,
       link: null,
-      isEditing: false
+      isEditing: false,
+      banner: "",
+      mainPhotos: ""
     };
     this.subCatEl = React.createRef();
     this.groupEl = React.createRef();
@@ -25,17 +27,8 @@ class ProductsPage extends Component {
     this.fetchProduct();
   }
 
-  static getDrivedStateFromProps(props, state) {
-    console.log(props);
-    console.log(state);
-    if (props.selectedProduct !== state.product.subCat) {
-      return {
-        link: props.selectedProduct
-      };
-    }
-  }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.selectedProduct !== this.props.selectedProduct) {
+    if (prevProps.match.params.product !== this.props.match.params.product) {
       this.setState({ isEditing: false });
       this.fetchProduct();
     }
@@ -43,7 +36,7 @@ class ProductsPage extends Component {
 
   fetchProduct = () => {
     this.setState({ isLoading: true });
-    fetch(`/api/products/${this.props.selectedProduct}`)
+    fetch(`/api/products/${this.props.match.params.product}`)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");
@@ -65,13 +58,11 @@ class ProductsPage extends Component {
       return { isEditing: !prevState.isEditing };
     });
   };
-  selecImageHandler = list => {
-    const src = [];
-    list.map(item => {
-      src.push(item.src);
-      return src;
-    });
-    this.setState({ mainPhotos: src });
+  selecImageHandler = photo => {
+    this.setState({ mainPhotos: photo.src });
+  };
+  bannerImageHandler = photo => {
+    this.setState({ banner: photo.src });
   };
   confirmEdit = e => {
     e.preventDefault();
@@ -84,6 +75,7 @@ class ProductsPage extends Component {
     const subHeading = this.subHeadEl.current.value;
     const moreDetails = this.moreDetailsEl.current.value;
     const mainPhotos = this.state.mainPhotos;
+    const banner = this.state.banner;
     const product = {
       subCat,
       group,
@@ -92,11 +84,12 @@ class ProductsPage extends Component {
       moreInfo,
       subHeading,
       moreDetails,
-      mainPhotos
+      mainPhotos,
+      banner
     };
     const requestBody = { ...product };
-    console.log(requestBody);
-    fetch(`/api/products/${this.props.selectedProduct}`, {
+
+    fetch(`/api/products/${product.subCat}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),
       headers: {
@@ -145,6 +138,7 @@ class ProductsPage extends Component {
             subHeadInput={this.subHeadEl}
             moreDetailsInput={this.moreDetailsEl}
             selectedImages={this.selecImageHandler}
+            bannerImage={this.bannerImageHandler}
           />
         )}
       </div>

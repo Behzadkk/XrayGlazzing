@@ -6,7 +6,7 @@ const EditProduct = props => (
     <div className="row justify-content-center my-5">
       <div className="col-md-12 text-center">
         <h1 className="h3 mb-3 font-weight-normal">
-          Edit {props.product.subCat}
+          Edit {props.product.name}
         </h1>
       </div>
       <div className="col-md-12">
@@ -42,6 +42,16 @@ const EditProduct = props => (
                 <option value="doors">Doors</option>
                 <option value="other">Other Products</option>
               </select>
+            </div>
+          </div>
+          <div className="form-group row justify-content-between">
+            <p className="my-2 mx-3">Select Banner Photo</p>
+            <div className="col-sm-9">
+              <GalleryImagePicker
+                selectedImages={props.bannerImage}
+                product={props.product}
+                photos={props.photos}
+              />
             </div>
           </div>
           <div className="form-group row justify-content-between">
@@ -120,7 +130,7 @@ const EditProduct = props => (
           </div>
 
           <div className="form-group row justify-content-between">
-            <p className="my-2 mx-3">Select Main Phtos</p>
+            <p className="my-2 mx-3">Select Main Photo</p>
             <div className="col-sm-9">
               <GalleryImagePicker
                 selectedImages={props.selectedImages}

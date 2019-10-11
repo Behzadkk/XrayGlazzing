@@ -59,6 +59,7 @@ exports.editAProduct = async (req, res) => {
       { subCat: productType },
       editingProduct
     );
+    updatedProduct.banner = editingProduct.banner;
     updatedProduct.save();
     res.status(200).json({
       updatedProduct: updatedProduct

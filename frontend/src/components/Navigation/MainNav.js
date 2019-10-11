@@ -24,26 +24,10 @@ const MainNavigation = props => (
 
       <div className="collapse navbar-collapse" id="navbarsExample05">
         <ul className="navbar-nav mr-auto">
-          <DropDown
-            products={props.navbarData.Rooflights}
-            name="Rooflights"
-            onSelect={props.onSelection}
-          />
-          <DropDown
-            products={props.navbarData.Windows}
-            name="Windows"
-            onSelect={props.onSelection}
-          />
-          <DropDown
-            products={props.navbarData.Doors}
-            name="Doors"
-            onSelect={props.onSelection}
-          />
-          <DropDown
-            products={props.navbarData.Other}
-            name="Other Products"
-            onSelect={props.onSelection}
-          />
+          <DropDown products={props.navbarData.Rooflights} name="Rooflights" />
+          <DropDown products={props.navbarData.Windows} name="Windows" />
+          <DropDown products={props.navbarData.Doors} name="Doors" />
+          <DropDown products={props.navbarData.Other} name="Other Products" />
           <li className="nav-item">
             <Link className="nav-link" to="/gallery">
               Gallery
