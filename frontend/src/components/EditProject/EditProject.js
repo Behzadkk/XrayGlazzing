@@ -1,6 +1,6 @@
 import React from "react";
 import GalleryImagePicker from "../GalleryImagePicker/GalleryImagePicker";
-import CategorySelector from "../CategorySelector/CategorySelector";
+import ProductSelect from "../ProductSelect/ProductSelect";
 
 const EditProject = props => {
   return (
@@ -41,10 +41,7 @@ const EditProject = props => {
               />
             </div>
           </div>
-          <CategorySelector
-            categoryInput={props.categoryInput}
-            category={props.project.products[0]}
-          />
+          <ProductSelect selectProducts={props.selectProducts} />
           <div className="form-group row justify-content-between">
             <p className="my-2 mx-3">Select Main Photos</p>
             <div className="col-sm-9">

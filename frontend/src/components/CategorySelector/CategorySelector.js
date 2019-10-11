@@ -8,8 +8,8 @@ class CategorySelector extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({ isLoading: false, categories: res.products });
-      });
-    console.log(this.props.category);
+      })
+      .then(() => console.log(this.state.categories));
   }
 
   render() {

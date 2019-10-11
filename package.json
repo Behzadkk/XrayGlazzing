@@ -29,7 +29,8 @@
     "react-images-upload": "^1.2.7",
     "react-notify-toast": "^0.5.0",
     "react-photo-gallery": "^8.0.0",
-    "react-router-dom": "^5.1.0"
+    "react-router-dom": "^5.1.0",
+    "react-select": "^3.0.8"
   },
   "devDependencies": {
     "nodemon": "^1.19.2"

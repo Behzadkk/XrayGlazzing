@@ -67,14 +67,20 @@ exports.editAProject = async (req, res) => {
     const editingProject = req.body;
     const id = req.params.id;
     const updatedProject = await Project.findByIdAndUpdate(id, editingProject);
+    updatedProject.products = editingProject.products;
     updatedProject.save();
-    console.log("UPDATING PRODUCT" + updatedProject.products[0]);
-    // if (updatedProject.products[0]) {
-    //   const editingProduct = await Product.findById(updatedProject.products[0]);
-    //   editingProduct.projects.push(updatedProject._id);
-    //   editingProduct.save();
-    // }
-
+    if (updatedProject.products) {
+      const editingProducts = await Product.find({
+        _id: { $in: updatedProject.products }
+      });
+      editingProducts.map(p => {
+        const including = p.projects.includes(updatedProject._id);
+        if (!including) {
+          p.projects.push(updatedProject._id);
+          p.save();
+        }
+      });
+    }
     res.status(200).json({
       updatedProject: updatedProject
     });

@@ -7,12 +7,12 @@ class ShowProject extends Component {
     super(props);
     this.projectEl = React.createRef();
     this.projDescEl = React.createRef();
-    this.categoryEl = React.createRef();
     this.state = {
       isLoading: true,
       isEditing: false,
       photos: [],
-      projects: []
+      projects: [],
+      products: []
     };
   }
 
@@ -46,13 +46,18 @@ class ShowProject extends Component {
   imageHandler = image => {
     this.setState({ photos: image.src });
   };
+  productSelectHandler = productsList => {
+    const productIds = productsList.map(p => p.value);
+    this.setState({ products: productIds });
+  };
   confirmEdit = e => {
     e.preventDefault();
     const name = this.projectEl.current.value;
     const description = this.projDescEl.current.value;
-    const products = this.categoryEl.current.value;
     const photos = this.state.photos;
-    const requestBody = { name, description, products, photos };
+    const products = this.state.products;
+    console.log(products);
+    const requestBody = { name, description, photos, products };
     console.log(requestBody);
     fetch(`/api/projects/${this.state.projects[0]._id}`, {
       method: "PUT",
@@ -105,8 +110,8 @@ class ShowProject extends Component {
             onConfirm={this.confirmEdit}
             projectInput={this.projectEl}
             projDescInput={this.projDescEl}
-            categoryInput={this.categoryEl}
             selectedImages={this.imageHandler}
+            selectProducts={this.productSelectHandler}
           />
         )}
       </div>
@@ -114,10 +119,3 @@ class ShowProject extends Component {
   }
 }
 export default ShowProject;
-
-function captialize(words) {
-  return words
-    .split("_")
-    .map(w => w.substring(0, 1).toUpperCase() + w.substring(1))
-    .join(" ");
-}
