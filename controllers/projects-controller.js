@@ -53,7 +53,6 @@ exports.uploadAProject = async (req, res) => {
   try {
     const newProject = req.body;
     const createdProject = await Project.create(newProject);
-    editingProduct.projects.push(createdProject._id);
     res.status(200).json({
       createdProject: createdProject
     });
@@ -89,12 +88,22 @@ exports.editAProject = async (req, res) => {
   }
 };
 
-exports.deleteAProject = (req, res) => {
-  Project.findByIdAndDelete(req.params.id, function(err) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send("Project Deleted");
+exports.deleteAProject = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const project = await Project.findById(id);
+    if (project.products) {
+      const editingProducts = await Product.find({
+        _id: { $in: project.products }
+      });
+      editingProducts.map(p => {
+        let index = p.projects.indexOf(id);
+        p.projects.splice(index, 1);
+      });
     }
-  });
+    project.remove();
+    res.send("Project Deleted");
+  } catch (error) {
+    console.log(error);
+  }
 };

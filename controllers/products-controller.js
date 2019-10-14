@@ -70,12 +70,12 @@ exports.editAProduct = async (req, res) => {
 };
 
 exports.deleteAProduct = (req, res) => {
-  const productType = req.params.productType;
-  Product.findOneAndDelete(productType, function(err) {
+  const id = req.body.id;
+  Product.findByIdAndDelete(id, function(err) {
     if (err) {
       console.log(err);
     } else {
-      res.send("Product Deleted");
+      res.redirect("/");
     }
   });
 };

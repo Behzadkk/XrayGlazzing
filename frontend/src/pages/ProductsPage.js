@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Spinner from "../components/Spinner/Spinner";
 import ShowProduct from "../components/ShowProduct/ShowProduct";
 import EditProduct from "../components/EditProduct/EditProduct";
+import AuthContext from "../context/authContext";
 
 class ProductsPage extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ProductsPage extends Component {
     this.subHeadEl = React.createRef();
     this.moreDetailsEl = React.createRef();
   }
-
+  static contextType = AuthContext;
   componentDidMount() {
     this.fetchProduct();
   }
@@ -45,7 +46,6 @@ class ProductsPage extends Component {
       })
       .then(resData => {
         this.setState({ product: resData.products, isLoading: false });
-        console.log(resData);
       })
       .catch(err => {
         console.log(err);
@@ -88,12 +88,13 @@ class ProductsPage extends Component {
       banner
     };
     const requestBody = { ...product };
-
+    const token = this.context.token;
     fetch(`/api/products/${product.subCat}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
       }
     })
       .then(res => {
@@ -108,6 +109,27 @@ class ProductsPage extends Component {
       });
     this.setState({ isEditing: false });
   };
+
+  deleteProductHandler = () => {
+    const id = this.state.product[0]._id;
+    fetch(`/api/products`, {
+      method: "DELETE",
+      body: JSON.stringify({ id: id }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.context.token
+      }
+    })
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Failed!");
+        }
+        return res;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   render() {
     return (
       <div className="">
@@ -119,12 +141,23 @@ class ProductsPage extends Component {
             photos={this.state.product[1]}
           />
         )}
-        <button
-          className="btn btn-sm btn-warning"
-          onClick={this.editingProduct}
-        >
-          Edit
-        </button>
+        {this.context.token && (
+          <div>
+            <button
+              className="btn btn-sm btn-warning"
+              onClick={this.editingProduct}
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-sm btn-danger"
+              onClick={this.deleteProductHandler}
+            >
+              Delete
+            </button>
+          </div>
+        )}
+
         {this.state.isEditing && (
           <EditProduct
             product={this.state.product[0]}

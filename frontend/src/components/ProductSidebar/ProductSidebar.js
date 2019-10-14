@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductSidebar = props => (
   <ul className="nav flex-column">
-    {props.photos ? (
+    {props.photos[0] ? (
       <li className="nav-item d-flex border-bottom py-3">
         <Link to={`/photos/${props.product.subCat}`}>
           <div>
@@ -20,7 +20,7 @@ const ProductSidebar = props => (
       <Link to="/gallery">Gallery </Link>
     )}
 
-    {props.photos ? (
+    {props.photos[0] ? (
       <li className="nav-item d-flex border-bottom py-3">
         <Link to={`/${props.product.subCat}/projects`}>
           <div>
@@ -36,7 +36,7 @@ const ProductSidebar = props => (
     ) : (
       <Link to="/projects">Projects </Link>
     )}
-    {props.photos ? (
+    {props.photos[0] ? (
       <li className="nav-item d-flex border-bottom py-3">
         <Link to="/drawings">
           <div>

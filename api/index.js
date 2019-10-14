@@ -5,12 +5,13 @@ const productController = require("../controllers/products-controller");
 const photoController = require("../controllers/photos-controller");
 const drawingController = require("../controllers/drawing-controllers");
 const projectController = require("../controllers/projects-controller");
+const userController = require("../controllers/user-controller");
 
 router.get("/products", productController.getAllProduct);
 router.get("/products/:productType", productController.getAProduct);
 router.post("/products", productController.createAProduct);
 router.put("/products/:productType", productController.editAProduct);
-router.delete("/products/:productType", productController.deleteAProduct);
+router.delete("/products/:id", productController.deleteAProduct);
 
 router.get("/gallery", photoController.getAllPhotos);
 router.get("/gallery/:productType", photoController.getPhotos);
@@ -29,5 +30,8 @@ router.get("/projects/:id", projectController.showAProject);
 router.post("/projects", projectController.uploadAProject);
 router.put("/projects/:id", projectController.editAProject);
 router.delete("/projects/:id", projectController.deleteAProject);
+
+router.post("/users", userController.createAUser);
+router.post("/login", userController.userLogin);
 
 module.exports = router;

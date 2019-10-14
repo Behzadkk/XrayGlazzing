@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import AssetSelector from "../components/AssetSelector/AssetSelector";
 import NewProduct from "../components/NewProduct/NewProduct";
-// import GalleryImagePicker from "../components/GalleryImagePicker/GalleryImagePicker";
+
 import ImageUpload from "../components/ImageUpload/ImageUpload";
 import NewProject from "../components/NewProject/NewProject";
-// import Uploader from "../components/Uploader/Uploader";
+import NewDrawing from "../components/NewDrawing/NewDrawing";
+import AuthContext from "../context/authContext";
 
 class AdminsPage extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class AdminsPage extends Component {
     this.projectEl = React.createRef();
     this.projDescEl = React.createRef();
   }
-
+  static contextType = AuthContext;
   state = { creatingAsset: "photo", images: [] };
   selectTypeHandler = e => {
     this.setState({ creatingAsset: e.target.value });
@@ -102,6 +103,7 @@ class AdminsPage extends Component {
             projDescInput={this.projDescEl}
           />
         )}
+        {this.state.creatingAsset === "drawing" && <NewDrawing />}
       </div>
     );
   }

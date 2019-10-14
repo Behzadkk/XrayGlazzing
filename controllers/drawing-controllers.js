@@ -16,7 +16,7 @@ exports.getAllDrawings = (req, res) => {
 };
 
 exports.uploadADrawing = (req, res) => {
-  const newDrawing = req.body.drawing;
+  const newDrawing = req.body;
   Drawing.create(newDrawing, function(err, createdDrawing) {
     if (err) {
       console.log(err);

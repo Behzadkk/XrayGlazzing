@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import EditProject from "../EditProject/EditProject";
 import ProductGallery from "../ProductGallery/ProductGallery";
-
+import AuthContext from "../../context/authContext";
 class ShowProject extends Component {
   constructor(props) {
     super(props);
@@ -15,9 +15,11 @@ class ShowProject extends Component {
       products: []
     };
   }
+  static contextType = AuthContext;
 
   componentDidMount() {
     this.fetchProjects();
+    console.log(this.context.token);
   }
 
   fetchProjects() {
@@ -31,7 +33,6 @@ class ShowProject extends Component {
       })
       .then(resData => {
         this.setState({ isLoading: false, projects: resData.projects });
-        console.log(resData);
       })
       .catch(err => {
         console.log(err);
@@ -56,14 +57,16 @@ class ShowProject extends Component {
     const description = this.projDescEl.current.value;
     const photos = this.state.photos;
     const products = this.state.products;
-    console.log(products);
+
     const requestBody = { name, description, photos, products };
-    console.log(requestBody);
+    const token = this.context.token;
+
     fetch(`/api/projects/${this.state.projects[0]._id}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
       }
     })
       .then(res => {
@@ -76,6 +79,15 @@ class ShowProject extends Component {
         console.log(err);
       });
     this.setState({ isEditing: false });
+  };
+
+  deleteProjectHandler = () => {
+    const id = this.state.projects[0]._id;
+    fetch(`/api/projects/${id}`, {
+      method: "DELETE"
+    }).catch(err => {
+      console.log(err);
+    });
   };
   render() {
     return (
@@ -97,12 +109,22 @@ class ShowProject extends Component {
             </div>
           </div>
         )}
-        <button
-          className="btn btn-sm btn-warning"
-          onClick={this.editingProject}
-        >
-          Edit
-        </button>
+        {this.context.token && (
+          <div>
+            <button
+              className="btn btn-sm btn-warning"
+              onClick={this.editingProject}
+            >
+              Edit
+            </button>
+            <button
+              className="btn btn-sm btn-danger"
+              onClick={this.deleteProjectHandler}
+            >
+              Delete
+            </button>
+          </div>
+        )}
         {this.state.isEditing && (
           <EditProject
             project={this.state.projects[0]}

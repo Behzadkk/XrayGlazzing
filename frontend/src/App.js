@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 
+import AuthContext from "./context/authContext";
 import MainNavigation from "./components/Navigation/MainNav";
 import navbarData from "./components/Navigation/navbarData";
 import LandingPage from "./pages/LandingPage";
@@ -14,11 +15,25 @@ import AboutUsPage from "./pages/AboutUsPage";
 import AdminsPage from "./pages/AdminsPage";
 import Spinner from "./components/Spinner/Spinner";
 import GalleryProduct from "./components/GalleryProduct/GalleryProduct";
-import Uploader from "./components/Uploader/Uploader";
 import ShowProject from "./components/ShowProject/ShowProject";
+import AuthPage from "./pages/Auth";
 
 class App extends Component {
-  state = { selectedProduct: "", products: null, isLoading: true };
+  state = {
+    selectedProduct: "",
+    products: null,
+    isLoading: true,
+    token: null,
+    userId: null
+  };
+
+  login = (token, userId) => {
+    this.setState({ token: token, userId: userId });
+  };
+
+  logout = () => {
+    this.setState({ token: null, userId: null });
+  };
 
   componentDidMount() {
     this.fetchProduct();
@@ -46,48 +61,64 @@ class App extends Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <MainNavigation navbarData={navbarData} />
-          {this.state.isLoading ? (
-            <Spinner />
-          ) : (
-            <div>
-              <Switch>
-                <Route
-                  path="/"
-                  render={() => <LandingPage products={this.state.products} />}
-                  exact
-                />
-                <Route
-                  path="/products/:product"
-                  render={props => (
-                    <ProductsPage {...props} products={this.state.products} />
+          <AuthContext.Provider
+            value={{
+              token: this.state.token,
+              userId: this.state.userId,
+              login: this.login,
+              logout: this.logout
+            }}
+          >
+            <MainNavigation navbarData={navbarData} />
+            {this.state.isLoading ? (
+              <Spinner />
+            ) : (
+              <div>
+                <Switch>
+                  <Route
+                    path="/"
+                    render={() => (
+                      <LandingPage products={this.state.products} />
+                    )}
+                    exact
+                  />
+                  <Route
+                    path="/products/:product"
+                    render={props => (
+                      <ProductsPage {...props} products={this.state.products} />
+                    )}
+                  />
+                  <Route
+                    path="/gallery"
+                    render={() => (
+                      <GalleryPage products={this.state.products} />
+                    )}
+                  />
+                  <Route
+                    path="/photos/:product"
+                    render={props => <GalleryProduct {...props} />}
+                  />
+                  <Route path="/projects" component={ProjectsPage} exact />
+                  <Route
+                    path="/:product/projects"
+                    render={props => <ProjectsPage {...props} />}
+                  />
+                  <Route
+                    path="/projects/:id"
+                    render={props => <ShowProject {...props} />}
+                  />
+                  <Route path="/drawings" component={DrawingsPage} />
+                  <Route path="/about" component={AboutUsPage} />
+                  <Route path="/auth" component={AuthPage} />
+                  {this.state.token && <Redirect from="/auth" to="/admin" />}
+                  {this.state.token && (
+                    <Route path="/admin" component={AdminsPage} />
                   )}
-                />
-                <Route
-                  path="/gallery"
-                  render={() => <GalleryPage products={this.state.products} />}
-                />
-                <Route
-                  path="/photos/:product"
-                  render={props => <GalleryProduct {...props} />}
-                />
-                <Route path="/projects" component={ProjectsPage} exact />
-                <Route
-                  path="/:product/projects"
-                  render={props => <ProjectsPage {...props} />}
-                />
-                <Route
-                  path="/projects/:id"
-                  render={props => <ShowProject {...props} />}
-                />
-                <Route path="/drawings" component={DrawingsPage} />
-                <Route path="/about" component={AboutUsPage} />
-                <Route path="/admin" component={AdminsPage} />
-                <Route path="/upload" component={Uploader} />
-              </Switch>
-            </div>
-          )}
-          <Footer />
+                </Switch>
+              </div>
+            )}
+            <Footer />
+          </AuthContext.Provider>
         </BrowserRouter>
       </div>
     );

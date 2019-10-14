@@ -5,11 +5,12 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
+const formData = require("express-form-data");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const seedDB = require("./seeds");
 const apiRouter = require("./api");
-
 const helper = require("./helper/helper");
-const formData = require("express-form-data");
 
 var cloudinary = require("cloudinary").v2;
 var multer = require("multer");
@@ -33,22 +34,22 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-mongoose
-  .connect(
-    `mongodb+srv://xrayDeveloper:${process.env.MONGODB_PASS_XRAY}@cluster0-afjtw.mongodb.net/Xray_Glazing?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
-  )
-  .then(() => console.log("connected to mongo server"))
-  .catch(err => console.log(err.message));
-
 // mongoose
-//   .connect("mongodb://localhost:27017/xray_glazzing", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false
-//   })
-//   .then(() => console.log("connected to local mongo server"))
+//   .connect(
+//     `mongodb+srv://xrayDeveloper:${process.env.MONGODB_PASS_XRAY}@cluster0-afjtw.mongodb.net/Xray_Glazing?retryWrites=true&w=majority`,
+//     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+//   )
+//   .then(() => console.log("connected to mongo server"))
 //   .catch(err => console.log(err.message));
+
+mongoose
+  .connect("mongodb://localhost:27017/xray_glazzing", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  })
+  .then(() => console.log("connected to local mongo server"))
+  .catch(err => console.log(err.message));
 
 // handle HTTP POST requests
 app.use(bodyParser.json());
@@ -65,6 +66,9 @@ app.use((req, res, next) => {
 // seedDB();
 app.use("/api", apiRouter);
 app.use(formData.parse());
+app.use(cors());
+app.use(fileUpload());
+app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
   res.send("Hello Xray");
@@ -104,6 +108,21 @@ app.post("/image-upload", (req, res) => {
 
   Promise.all(promises).then(results => res.json(results));
 });
+
+app.post("/upload/drawings", (req, res, next) => {
+  console.log(req.body);
+  // let uploadFile = req.files.file;
+  // const fileName = req.files.file.name;
+  // uploadFile.mv(`${__dirname}/public/files/${fileName}`, function(err) {
+  //   if (err) {
+  //     return res.status(500).send(err);
+  //   }
+  //   res.json({
+  //     file: `public/${req.files.file.name}`
+  //   });
+  // });
+});
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log("Xray server started at port " + port);
