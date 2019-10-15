@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Drawing = require("../models/drawing");
 
 // Show all drawings// Index
-// We dont need it yet
 exports.getAllDrawings = (req, res) => {
   Drawing.find({}, function(err, drawings) {
     if (err) {
@@ -16,6 +15,9 @@ exports.getAllDrawings = (req, res) => {
 };
 
 exports.uploadADrawing = (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   const newDrawing = req.body;
   Drawing.create(newDrawing, function(err, createdDrawing) {
     if (err) {
@@ -29,6 +31,9 @@ exports.uploadADrawing = (req, res) => {
 };
 
 exports.editADrawing = (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   const editingDrawing = req.body.drawing;
   const id = req.params.id;
   Drawing.findOneAndUpdate(id, editingDrawing, function(err, updatedDrawing) {
@@ -43,6 +48,9 @@ exports.editADrawing = (req, res) => {
 };
 
 exports.deleteADrawing = (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   Drawing.findByIdAndDelete(req.params.id, function(err) {
     if (err) {
       console.log(err);

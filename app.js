@@ -10,6 +10,7 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const seedDB = require("./seeds");
 const apiRouter = require("./api");
+const isAuth = require("./middleware/is-auth");
 const helper = require("./helper/helper");
 
 var cloudinary = require("cloudinary").v2;
@@ -64,10 +65,12 @@ app.use((req, res, next) => {
   next();
 });
 // seedDB();
+app.use(isAuth);
 app.use("/api", apiRouter);
 app.use(formData.parse());
 app.use(cors());
-app.use(fileUpload());
+// app.use(fileUpload());
+
 app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
@@ -102,7 +105,7 @@ app.get("*", (req, res) => {
 //   });
 // });
 
-app.post("/image-upload", (req, res) => {
+app.post("/image-upload", isAuth, (req, res) => {
   const values = Object.values(req.files);
   const promises = values.map(image => cloudinary.uploader.upload(image.path));
 

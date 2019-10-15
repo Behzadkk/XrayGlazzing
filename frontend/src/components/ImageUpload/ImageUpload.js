@@ -4,6 +4,7 @@ import "./ImageUpload.css";
 import CategorySelector from "../CategorySelector/CategorySelector";
 import Uploader from "../Uploader/Uploader";
 import ProjectSelector from "../ProjectSelector/ProjectSelector";
+import AuthContext from "../../context/authContext";
 
 class ImageUpload extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class ImageUpload extends React.Component {
     this.projectEl = React.createRef();
     this.state = { savedFile: [] };
   }
-
+  static contextType = AuthContext;
   _handleSubmit(e) {
     e.preventDefault();
 
@@ -22,12 +23,13 @@ class ImageUpload extends React.Component {
       return { source: photo, category: category, project: project };
     });
     const requestBody = [...photos];
-    console.log(this.state.savedFile);
+    const token = this.context.token;
     fetch("/api/gallery", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
       }
     })
       .then(res => {
@@ -35,6 +37,9 @@ class ImageUpload extends React.Component {
           throw new Error("Failed!");
         }
         return res.json();
+      })
+      .then(res => {
+        this.setState({ savedFile: [] });
       })
       .catch(err => {
         console.log(err);

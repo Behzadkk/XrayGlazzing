@@ -27,7 +27,7 @@ class App extends Component {
     userId: null
   };
 
-  login = (token, userId) => {
+  login = (token, userId, tokenExpiration) => {
     this.setState({ token: token, userId: userId });
   };
 
@@ -109,8 +109,11 @@ class App extends Component {
                   />
                   <Route path="/drawings" component={DrawingsPage} />
                   <Route path="/about" component={AboutUsPage} />
-                  <Route path="/auth" component={AuthPage} />
-                  {this.state.token && <Redirect from="/auth" to="/admin" />}
+
+                  {this.state.token && <Redirect from="/auth" to="/" exact />}
+                  {!this.state.token && (
+                    <Route path="/auth" component={AuthPage} />
+                  )}
                   {this.state.token && (
                     <Route path="/admin" component={AdminsPage} />
                   )}

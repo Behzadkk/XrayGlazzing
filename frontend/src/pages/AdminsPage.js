@@ -35,6 +35,7 @@ class AdminsPage extends Component {
       .join("_");
   };
   confirmProduct = () => {
+    const token = this.context.token;
     const name = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
     const description = this.descEl.current.value;
@@ -46,7 +47,8 @@ class AdminsPage extends Component {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
       }
     })
       .then(res => {
@@ -63,12 +65,14 @@ class AdminsPage extends Component {
   confirmProject = () => {
     const name = this.projectEl.current.value;
     const description = this.projDescEl.current.value;
+    const token = this.context.token;
     const requestBody = { name, description };
     fetch("/api/projects", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
       }
     })
       .then(res => {

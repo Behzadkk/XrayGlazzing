@@ -89,6 +89,7 @@ class ProductsPage extends Component {
     };
     const requestBody = { ...product };
     const token = this.context.token;
+    console.log(token);
     fetch(`/api/products/${product.subCat}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),

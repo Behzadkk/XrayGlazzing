@@ -38,6 +38,9 @@ exports.getPhotos = (req, res) => {
 };
 
 exports.uploadPhotos = (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   const newPhotos = req.body;
   Photo.insertMany(newPhotos, function(err, createdPhoto) {
     if (err) {
@@ -53,6 +56,9 @@ exports.uploadPhotos = (req, res) => {
 };
 
 exports.editAPhoto = (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   const editingPhoto = req.body.photo;
   const id = req.params.id;
   Photo.findOneAndUpdate(id, editingPhoto, function(err, updatedPhoto) {
@@ -67,6 +73,9 @@ exports.editAPhoto = (req, res) => {
 };
 
 exports.deleteAPhoto = (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   Photo.findByIdAndDelete(req.params.id, function(err) {
     if (err) {
       console.log(err);

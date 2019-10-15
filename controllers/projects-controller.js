@@ -50,6 +50,9 @@ exports.showAProject = (req, res) => {
 };
 
 exports.uploadAProject = async (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   try {
     const newProject = req.body;
     const createdProject = await Project.create(newProject);
@@ -62,6 +65,9 @@ exports.uploadAProject = async (req, res) => {
 };
 
 exports.editAProject = async (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   try {
     const editingProject = req.body;
     const id = req.params.id;
@@ -89,6 +95,9 @@ exports.editAProject = async (req, res) => {
 };
 
 exports.deleteAProject = async (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   try {
     const id = req.params.id;
     const project = await Project.findById(id);

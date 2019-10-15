@@ -38,6 +38,9 @@ exports.getAProduct = (req, res) => {
 };
 
 exports.createAProduct = (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   const newProduct = req.body;
   console.log(req.body);
   Product.create(newProduct, function(err, createdProduct) {
@@ -52,6 +55,9 @@ exports.createAProduct = (req, res) => {
 };
 
 exports.editAProduct = async (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   try {
     const editingProduct = req.body;
     const productType = req.params.productType;
@@ -70,6 +76,9 @@ exports.editAProduct = async (req, res) => {
 };
 
 exports.deleteAProduct = (req, res) => {
+  if (!req.isAuth) {
+    throw new Error("Unauthenticated");
+  }
   const id = req.body.id;
   Product.findByIdAndDelete(id, function(err) {
     if (err) {

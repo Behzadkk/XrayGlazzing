@@ -1,5 +1,5 @@
 import React from "react";
-
+import AuthContext from "../../context/authContext";
 import CategorySelector from "../CategorySelector/CategorySelector";
 
 class NewDrawing extends React.Component {
@@ -11,16 +11,21 @@ class NewDrawing extends React.Component {
     };
     this.handleUploadFile = this.handleUploadFile.bind(this);
   }
+  static contextType = AuthContext;
 
   handleUploadFile(e) {
     e.preventDefault();
+    const token = this.context.token;
     const data = new FormData();
     data.append("file", this.uploadInput.files[0]);
     // data.append("filename", this.fileName.value);
     console.log(this.uploadInput.files);
     fetch("/upload/drawings", {
       method: "POST",
-      body: data
+      body: data,
+      headers: {
+        Authorization: "Bearer " + token
+      }
     }).then(response => {
       console.log(response);
       response.json().then(body => {
