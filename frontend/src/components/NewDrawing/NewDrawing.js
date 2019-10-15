@@ -7,7 +7,10 @@ class NewDrawing extends React.Component {
     super(props);
     this.catEl = React.createRef();
     this.state = {
-      fileURL: ""
+      uploading: false,
+      files: [],
+      selectedFile: null,
+      loaded: 0
     };
     this.handleUploadFile = this.handleUploadFile.bind(this);
   }
@@ -16,36 +19,40 @@ class NewDrawing extends React.Component {
   handleUploadFile(e) {
     e.preventDefault();
     const token = this.context.token;
-    const data = new FormData();
-    data.append("file", this.uploadInput.files[0]);
-    // data.append("filename", this.fileName.value);
-    console.log(this.uploadInput.files);
+    const files = Array.from(e.target.files);
+    const formData = new FormData();
+    files.forEach((file, i) => {
+      formData.append(i, file);
+    });
     fetch("/upload/drawings", {
       method: "POST",
-      body: data,
+      body: formData,
       headers: {
         Authorization: "Bearer " + token
       }
-    }).then(response => {
-      console.log(response);
-      response.json().then(body => {
-        this.setState({ fileURL: `/${body.file}` });
+    })
+      .then(res => res.json())
+      .then(files => {
+        console.log(files);
+        this.setState({
+          uploading: false,
+          files
+        });
       });
-    });
   }
 
   _handleSubmit(e) {
     e.preventDefault();
-
     const category = this.catEl.current.value;
-    const source = this.state.fileURL;
-
+    const source = this.state.files.source;
+    const token = this.context.token;
     const requestBody = { category, source };
     fetch("/api/drawings", {
       method: "POST",
       body: JSON.stringify(requestBody),
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        Authorization: "Bearer " + token
       }
     })
       .then(res => {
@@ -62,8 +69,8 @@ class NewDrawing extends React.Component {
   render() {
     return (
       <div className="previewComponent">
-        <div>hi</div>
-        {/* <form onSubmit={e => this._handleSubmit(e)}>
+        {/* <div>hi</div> */}
+        <form onSubmit={e => this._handleSubmit(e)}>
           <div className="col-md-12 text-center">
             <h1 className="h3 mb-3 font-weight-normal">Upload a new drawing</h1>
           </div>
@@ -73,7 +80,8 @@ class NewDrawing extends React.Component {
             </label>
             <div className="col-sm-9">
               <input
-                className="form-control"
+                className="form-control file-input"
+                name="file"
                 type="file"
                 id="drawing"
                 onChange={this.handleUploadFile}
@@ -82,7 +90,6 @@ class NewDrawing extends React.Component {
                 }}
               />
             </div>
-            <input type="file" />
           </div>
           <CategorySelector categoryInput={this.catEl} />
           <div className="form-group row justify-content-end mt-5 mt-sm-0">
@@ -96,7 +103,7 @@ class NewDrawing extends React.Component {
               </button>
             </div>
           </div>
-        </form> */}
+        </form>
       </div>
     );
   }

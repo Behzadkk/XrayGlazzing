@@ -12,3 +12,8 @@
 .side-image {
   width: 4rem;
 }
+
+.file-input {
+  visibility: visible !important;
+  border: 0;
+}

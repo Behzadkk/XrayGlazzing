@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import Spinner from "../components/Spinner/Spinner";
 import ProjectList from "../components/ProjectList/ProjectList";
-import Backdrop from "../components/Backdrop/Backdrop";
-import ShowProject from "../components/ShowProject/ShowProject";
-import Modal from "../components/Modal/Modal";
 
 class ProjectsPage extends Component {
   constructor(props) {
