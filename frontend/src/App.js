@@ -117,6 +117,7 @@ class App extends Component {
                   {this.state.token && (
                     <Route path="/admin" component={AdminsPage} />
                   )}
+                  <Redirect from="*" to="/" />
                 </Switch>
               </div>
             )}
