@@ -15,8 +15,10 @@ const AssetSelector = props => (
             <select
               className="form-control"
               id="selector"
+              value="none"
               onChange={props.assetSelection}
             >
+              <option value="none">Please select a data type</option>
               <option value="photo">Photo</option>
               <option value="product">Product</option>
               <option value="project">Project</option>

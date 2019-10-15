@@ -57,17 +57,6 @@ class ProjectsPage extends Component {
             projectpreview={this.projectViewHandler}
           />
         )}
-        {this.state.selectedProject && (
-          <div>
-            <Modal>
-              <ShowProject
-                project={this.state.selectedProject}
-                closeModal={this.closeModal}
-              />
-            </Modal>
-            <Backdrop />
-          </div>
-        )}
       </div>
     );
   }

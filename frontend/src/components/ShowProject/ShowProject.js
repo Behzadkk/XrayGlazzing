@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import EditProject from "../EditProject/EditProject";
 import ProductGallery from "../ProductGallery/ProductGallery";
+import { Redirect } from "react-router-dom";
 import AuthContext from "../../context/authContext";
 class ShowProject extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class ShowProject extends Component {
       isEditing: false,
       photos: [],
       projects: [],
-      products: []
+      products: [],
+      deleted: false
     };
   }
   static contextType = AuthContext;
@@ -83,11 +85,17 @@ class ShowProject extends Component {
 
   deleteProjectHandler = () => {
     const id = this.state.projects[0]._id;
+    const token = this.context.token;
     fetch(`/api/projects/${id}`, {
-      method: "DELETE"
-    }).catch(err => {
-      console.log(err);
-    });
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    })
+      .then(res => this.setState({ deleted: true }))
+      .catch(err => {
+        console.log(err);
+      });
   };
   render() {
     return (
@@ -109,6 +117,7 @@ class ShowProject extends Component {
             </div>
           </div>
         )}
+
         {this.context.token && (
           <div>
             <button
@@ -136,6 +145,7 @@ class ShowProject extends Component {
             selectProducts={this.productSelectHandler}
           />
         )}
+        {this.state.deleted && <Redirect to="/projects" exact />}
       </div>
     );
   }

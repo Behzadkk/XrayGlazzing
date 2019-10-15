@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Product = require("../models/product");
 const Photo = require("../models/photo");
+const Project = require("../models/project");
 
 // Show all products// Index
 exports.getAllProduct = (req, res) => {
@@ -75,16 +76,25 @@ exports.editAProduct = async (req, res) => {
   }
 };
 
-exports.deleteAProduct = (req, res) => {
+exports.deleteAProduct = async (req, res) => {
   if (!req.isAuth) {
     throw new Error("Unauthenticated");
   }
-  const id = req.body.id;
-  Product.findByIdAndDelete(id, function(err) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/");
+  try {
+    const id = req.body.id;
+    const product = await Product.findById(id);
+    if (product.projects) {
+      const editingProjects = await Project.find({
+        _id: { $in: product.projects }
+      });
+      editingProjects.map(p => {
+        let index = p.products.indexOf(id);
+        p.products.splice(index, 1);
+      });
     }
-  });
+    product.remove();
+    res.send("Product Deleted");
+  } catch (error) {
+    console.log(error);
+  }
 };

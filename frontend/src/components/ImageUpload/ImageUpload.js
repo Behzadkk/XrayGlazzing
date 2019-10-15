@@ -39,7 +39,7 @@ class ImageUpload extends React.Component {
         return res.json();
       })
       .then(res => {
-        this.setState({ savedFile: [] });
+        this.props.uploaded();
       })
       .catch(err => {
         console.log(err);

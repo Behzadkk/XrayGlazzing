@@ -17,7 +17,7 @@ class AdminsPage extends Component {
     this.projDescEl = React.createRef();
   }
   static contextType = AuthContext;
-  state = { creatingAsset: "photo", images: [] };
+  state = { creatingAsset: "none", images: [] };
   selectTypeHandler = e => {
     this.setState({ creatingAsset: e.target.value });
   };
@@ -34,7 +34,8 @@ class AdminsPage extends Component {
       .map(w => w.toLowerCase())
       .join("_");
   };
-  confirmProduct = () => {
+  confirmProduct = e => {
+    e.preventDefault();
     const token = this.context.token;
     const name = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
@@ -57,12 +58,13 @@ class AdminsPage extends Component {
         }
         return res.json();
       })
-      .then(resData => alert(resData.toString() + "added to databe"))
+      .then(resData => this.setState({ creatingAsset: "none" }))
       .catch(err => {
         console.log(err);
       });
   };
-  confirmProject = () => {
+  confirmProject = e => {
+    e.preventDefault();
     const name = this.projectEl.current.value;
     const description = this.projDescEl.current.value;
     const token = this.context.token;
@@ -81,10 +83,13 @@ class AdminsPage extends Component {
         }
         return res.json();
       })
-      .then(resData => alert(resData.toString() + "added to databe"))
+      .then(resData => this.setState({ creatingAsset: "none" }))
       .catch(err => {
         console.log(err);
       });
+  };
+  endUploadProcess = () => {
+    this.setState({ creatingAsset: "none" });
   };
 
   render() {
@@ -99,7 +104,9 @@ class AdminsPage extends Component {
             descInput={this.descEl}
           />
         )}
-        {this.state.creatingAsset === "photo" && <ImageUpload />}
+        {this.state.creatingAsset === "photo" && (
+          <ImageUpload uploaded={this.endUploadProcess} />
+        )}
         {this.state.creatingAsset === "project" && (
           <NewProject
             onConfirm={this.confirmProject}

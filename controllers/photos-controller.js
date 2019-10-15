@@ -42,11 +42,18 @@ exports.uploadPhotos = (req, res) => {
     throw new Error("Unauthenticated");
   }
   const newPhotos = req.body;
+  newPhotos.map(photo => {
+    if (photo.category === "") {
+      photo.category = null;
+    }
+    if (photo.project === "") {
+      photo.project = null;
+    }
+  });
   Photo.insertMany(newPhotos, function(err, createdPhoto) {
     if (err) {
       console.log(err);
     } else {
-      console.log(newPhotos);
       console.log(createdPhoto);
       res.status(200).json({
         createdPhoto: createdPhoto
