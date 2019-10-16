@@ -114,7 +114,9 @@ class AdminsPage extends Component {
             projDescInput={this.projDescEl}
           />
         )}
-        {this.state.creatingAsset === "drawing" && <NewDrawing />}
+        {this.state.creatingAsset === "drawing" && (
+          <NewDrawing uploaded={this.endUploadProcess} />
+        )}
       </div>
     );
   }

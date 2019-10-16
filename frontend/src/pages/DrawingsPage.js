@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
 class DrawingsPage extends Component {
   constructor(props) {
     super(props);
@@ -40,10 +38,15 @@ class DrawingsPage extends Component {
             {this.state.drawings.map((drawing, i) => {
               return (
                 <div key={i}>
-                  <h5>{drawing.category.name}</h5>
-                  <Link to={drawing.source}>
-                    <i className="far fa-file-pdf"></i>Download
-                  </Link>
+                  <h5>{drawing.name}</h5>
+                  {drawing.drawings.map(d => (
+                    <div>
+                      <a href={d.source}>
+                        <i className="far fa-file-pdf"></i>Download {d.name}
+                      </a>
+                    </div>
+                  ))}
+                  <hr />
                 </div>
               );
             })}

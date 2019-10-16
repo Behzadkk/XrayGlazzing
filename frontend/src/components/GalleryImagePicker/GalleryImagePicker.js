@@ -6,49 +6,13 @@ class GalleryImagePicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // isLoading: true,
       image: null
-      // imageList: null
     };
 
     this.onPick = this.onPick.bind(this);
   }
-  // componentDidMount() {
-  //   this.fetchGallery();
-  // }
-  // fetchGallery = () => {
-  //   this.setState({ isLoading: true });
-  //   let endPoint = "";
-  //   if (this.props.product) {
-  //     endPoint = this.props.product.subCat;
-  //   }
-  //   fetch("/api/gallery/" + endPoint)
-  //     .then(res => {
-  //       if (res.status !== 200 && res.status !== 201) {
-  //         throw new Error("Failed!");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then(resData => {
-  //       console.log(resData);
-  //       this.setState({ imageList: resData.photos, isLoading: false });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       this.setState({ isLoading: false });
-  //     });
-  // };
 
   onPick(image) {
-    // this.setState(prevState => {
-    //   const selections = prevState.image;
-    //   // if (selections.length > 2) {
-    //   //   selections.shift();
-    //   // }
-    //   selections.push(image);
-    //   return { image: selections };
-    // });
-    // console.log(this.state.image);
     this.setState({ image });
   }
 

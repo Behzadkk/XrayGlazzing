@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 const Drawing = require("../models/drawing");
+const Product = require("../models/product");
 
 // Show all drawings// Index
 exports.getAllDrawings = async (req, res) => {
   try {
-    const drawings = await Drawing.find({})
-      .populate("category")
+    const products = await Product.find()
+      .populate("drawings")
       .exec();
+    const drawings = await products.filter(p => p.drawings.length > 0);
     res.status(200).json({
       drawings: drawings
     });
@@ -15,20 +17,25 @@ exports.getAllDrawings = async (req, res) => {
   }
 };
 
-exports.uploadADrawing = (req, res) => {
+exports.uploadADrawing = async (req, res) => {
   if (!req.isAuth) {
     throw new Error("Unauthenticated");
   }
-  const newDrawing = req.body;
-  Drawing.create(newDrawing, function(err, createdDrawing) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).json({
-        createdDrawing: createdDrawing
-      });
+  try {
+    const newDrawing = req.body;
+    if (newDrawing.category === "") {
+      newDrawing.category = null;
     }
-  });
+    const createdDrawing = await Drawing.create(newDrawing);
+    const updatingProduct = await Product.findById(createdDrawing.category);
+    updatingProduct.drawings.push(createdDrawing._id);
+    updatingProduct.save();
+    res.status(200).json({
+      createdDrawing: createdDrawing
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.editADrawing = (req, res) => {

@@ -6,6 +6,7 @@ class NewDrawing extends React.Component {
   constructor(props) {
     super(props);
     this.catEl = React.createRef();
+    this.nameEl = React.createRef();
     this.state = {
       uploading: false,
       files: [],
@@ -38,15 +39,17 @@ class NewDrawing extends React.Component {
           uploading: false,
           files
         });
+        console.log(this.state);
       });
   }
 
   _handleSubmit(e) {
     e.preventDefault();
     const category = this.catEl.current.value;
+    const name = this.nameEl.current.value;
     const source = this.state.files.source;
     const token = this.context.token;
-    const requestBody = { category, source };
+    const requestBody = { category, source, name };
     fetch("/api/drawings", {
       method: "POST",
       body: JSON.stringify(requestBody),
@@ -61,6 +64,9 @@ class NewDrawing extends React.Component {
         }
         return res.json();
       })
+      .then(res => {
+        this.props.uploaded();
+      })
       .catch(err => {
         console.log(err);
       });
@@ -69,7 +75,6 @@ class NewDrawing extends React.Component {
   render() {
     return (
       <div className="previewComponent">
-        {/* <div>hi</div> */}
         <form onSubmit={e => this._handleSubmit(e)}>
           <div className="col-md-12 text-center">
             <h1 className="h3 mb-3 font-weight-normal">Upload a new drawing</h1>
@@ -88,6 +93,20 @@ class NewDrawing extends React.Component {
                 ref={ref => {
                   this.uploadInput = ref;
                 }}
+              />
+            </div>
+          </div>
+          <div className="form-group row justify-content-between">
+            <label className="my-2 mx-3" htmlFor="name">
+              Name
+            </label>
+            <div className="col-sm-9">
+              <input
+                className="form-control"
+                type="text"
+                id="name"
+                ref={this.nameEl}
+                defaultValue="xray-glazing"
               />
             </div>
           </div>

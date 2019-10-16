@@ -35,22 +35,22 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// mongoose
-//   .connect(
-//     `mongodb+srv://xrayDeveloper:${process.env.MONGODB_PASS_XRAY}@cluster0-afjtw.mongodb.net/Xray_Glazing?retryWrites=true&w=majority`,
-//     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
-//   )
-//   .then(() => console.log("connected to mongo server"))
-//   .catch(err => console.log(err.message));
-
 mongoose
-  .connect("mongodb://localhost:27017/xray_glazzing", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  })
-  .then(() => console.log("connected to local mongo server"))
+  .connect(
+    `mongodb+srv://xrayDeveloper:${process.env.MONGODB_PASS_XRAY}@cluster0-afjtw.mongodb.net/Xray_Glazing?retryWrites=true&w=majority`,
+    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+  )
+  .then(() => console.log("connected to mongo server"))
   .catch(err => console.log(err.message));
+
+// mongoose
+//   .connect("mongodb://localhost:27017/xray_glazzing", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+//   })
+//   .then(() => console.log("connected to local mongo server"))
+//   .catch(err => console.log(err.message));
 
 // handle HTTP POST requests
 app.use(bodyParser.json());
