@@ -17,7 +17,7 @@ const DropDown = props => {
     <li className="nav-item dropdown">
       <NavLink
         className="nav-link dropdown-toggle"
-        to=""
+        to={"/category/" + props.name}
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"

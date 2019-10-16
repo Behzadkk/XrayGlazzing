@@ -2,16 +2,17 @@ const mongoose = require("mongoose");
 const Drawing = require("../models/drawing");
 
 // Show all drawings// Index
-exports.getAllDrawings = (req, res) => {
-  Drawing.find({}, function(err, drawings) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).json({
-        drawings: drawings
-      });
-    }
-  });
+exports.getAllDrawings = async (req, res) => {
+  try {
+    const drawings = await Drawing.find({})
+      .populate("category")
+      .exec();
+    res.status(200).json({
+      drawings: drawings
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.uploadADrawing = (req, res) => {

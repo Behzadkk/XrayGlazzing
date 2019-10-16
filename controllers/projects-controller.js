@@ -29,24 +29,21 @@ exports.getProjects = async (req, res) => {
   }
 };
 
-exports.showAProject = (req, res) => {
-  let projects = [];
-  Project.findById(req.params.id, function(err, foundProject) {
-    if (err) {
-      console.log(err);
-    }
+exports.showAProject = async (req, res) => {
+  try {
+    let projects = [];
+    const foundProject = await Project.findById(req.params.id);
     projects.push(foundProject);
-    Photo.find({ project: foundProject._id }, function(err, photos) {
-      if (err) {
-        console.log(err);
-      } else {
-        projects.push({ photos });
-        res.status(200).json({
-          projects: projects
-        });
-      }
-    });
-  });
+    if (foundProject) {
+      const photos = await Photo.find({ project: foundProject._id });
+      projects.push({ photos });
+      res.status(200).json({
+        projects: projects
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.uploadAProject = async (req, res) => {

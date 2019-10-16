@@ -8,6 +8,7 @@ const projectController = require("../controllers/projects-controller");
 const userController = require("../controllers/user-controller");
 
 router.get("/products", productController.getAllProduct);
+router.get("/category/:category", productController.getACategory);
 router.get("/products/:productType", productController.getAProduct);
 router.post("/products", productController.createAProduct);
 router.put("/products/:productType", productController.editAProduct);

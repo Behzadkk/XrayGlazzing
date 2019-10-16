@@ -69,7 +69,7 @@ class ProductsPage extends Component {
 
     const subCat = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
-    const description = this.descEl.current.value;
+    const description = this.descEl.children;
     const keyFeatures = this.keyFeatureEl.current.value;
     const moreInfo = this.moreInfoEl.current.value;
     const subHeading = this.subHeadEl.current.value;

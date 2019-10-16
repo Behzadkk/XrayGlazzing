@@ -17,6 +17,7 @@ import Spinner from "./components/Spinner/Spinner";
 import GalleryProduct from "./components/GalleryProduct/GalleryProduct";
 import ShowProject from "./components/ShowProject/ShowProject";
 import AuthPage from "./pages/Auth";
+import CategoryPage from "./pages/CategoryPage";
 
 class App extends Component {
   state = {
@@ -109,6 +110,10 @@ class App extends Component {
                   />
                   <Route path="/drawings" component={DrawingsPage} />
                   <Route path="/about" component={AboutUsPage} />
+                  <Route
+                    path="/category/:category"
+                    render={props => <CategoryPage {...props} />}
+                  />
 
                   {this.state.token && <Redirect from="/auth" to="/" exact />}
                   {!this.state.token && (

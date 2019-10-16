@@ -69,7 +69,6 @@ app.use(isAuth);
 app.use("/api", apiRouter);
 app.use(formData.parse());
 app.use(cors());
-// app.use(fileUpload());
 
 app.use("/public", express.static(__dirname + "/public"));
 
@@ -113,17 +112,21 @@ app.post("/image-upload", isAuth, (req, res) => {
 });
 
 app.post("/upload/drawings", (req, res, next) => {
-  console.log(req.body);
-  // let uploadFile = req.files.file;
-  // const fileName = req.files.file.name;
-  // uploadFile.mv(`${__dirname}/public/files/${fileName}`, function(err) {
-  //   if (err) {
-  //     return res.status(500).send(err);
-  //   }
-  //   res.json({
-  //     file: `public/${req.files.file.name}`
-  //   });
-  // });
+  console.log(req.files);
+  let uploadFile = req.files[0];
+  const fileName = helper.escapeRegex(uploadFile.originalFilename);
+  fs.readFile(uploadFile.path, (err, data) => {
+    const newPath = __dirname + "/frontend/public/drawings/" + fileName;
+    fs.writeFile(newPath, data, error => {
+      if (error) {
+        console.error(error);
+        res.end();
+      } else {
+        res.send({ source: "/drawings/" + fileName });
+        //here you can save the file name to db, if needed
+      }
+    });
+  });
 });
 
 const port = process.env.PORT || 5000;

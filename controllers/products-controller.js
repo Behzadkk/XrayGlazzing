@@ -16,26 +16,35 @@ exports.getAllProduct = (req, res) => {
   });
 };
 
-// Show all products in a sub category
-exports.getAProduct = (req, res) => {
-  let products = [];
-  const productType = req.params.productType;
-  Product.findOne({ subCat: productType }, function(err, foundProduct) {
-    if (err) {
-      console.log(err);
-    }
-    products.push(foundProduct);
-    Photo.find({ category: foundProduct._id }, function(err, photos) {
-      if (err) {
-        console.log(err);
-      } else {
-        products.push({ photos });
-        res.status(200).json({
-          products: products
-        });
-      }
+exports.getACategory = async (req, res) => {
+  try {
+    const category = req.params.category.toLowerCase();
+    const products = await Product.find({ group: category });
+    res.status(200).json({
+      products: products
     });
-  });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Show all products in a sub category
+exports.getAProduct = async (req, res) => {
+  try {
+    let products = [];
+    const productType = req.params.productType;
+    const foundProduct = await Product.findOne({ subCat: productType });
+    products.push(foundProduct);
+    if (foundProduct) {
+      const photos = await Photo.find({ category: foundProduct._id });
+      products.push({ photos });
+      res.status(200).json({
+        products: products
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.createAProduct = (req, res) => {
@@ -43,7 +52,6 @@ exports.createAProduct = (req, res) => {
     throw new Error("Unauthenticated");
   }
   const newProduct = req.body;
-  console.log(req.body);
   Product.create(newProduct, function(err, createdProduct) {
     if (err) {
       console.log(err);
