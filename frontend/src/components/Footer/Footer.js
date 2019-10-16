@@ -15,33 +15,33 @@ const Footer = () => (
                 <Link to="/">Home</Link>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Windows</a>
+                <Link to="/category/windows">Windows</Link>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Doors</a>
+                <Link to="/category/doors">Doors</Link>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Shop Fronts</a>
+                <Link to="/products/shop_fronts">Shop Fronts</Link>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Roofing System</a>
+                <Link to="/category/rooflights">Roofing System</Link>
               </li>
-              <li className="list-unstyled">
+              {/* <li className="list-unstyled">
                 <a href="#!">Bespoke Glazing</a>
-              </li>
+              </li> */}
             </ul>
           </MDBCol>
           <MDBCol md="3" sm="6" className="text-left">
             <h5 className="title">Useful Links</h5>
             <ul className="pl-2">
               <li className="list-unstyled">
-                <a href="#!">Projects</a>
+                <Link to="/projects">Projects</Link>
               </li>
               <li className="list-unstyled">
                 <Link to="/gallery">Gallery</Link>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Drawings</a>
+                <Link to="/drawings">Drawings</Link>
               </li>
             </ul>
           </MDBCol>
@@ -49,19 +49,16 @@ const Footer = () => (
             <h5 className="title">About Us</h5>
             <ul className="pl-2">
               <li className="list-unstyled">
-                <a href="#!">Why Us</a>
+                <Link to="/about">Why Us</Link>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Contact Us</a>
+                <Link to="/about">Contact Us</Link>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Site Map</a>
+                <Link to="/about">Request A Free Quote</Link>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Request A Free Quote</a>
-              </li>
-              <li className="list-unstyled">
-                <a href="#!">Book A Free Appointment</a>
+                <Link to="/about">Book A Free Appointment</Link>
               </li>
             </ul>
           </MDBCol>
@@ -110,6 +107,9 @@ const Footer = () => (
         <MDBContainer fluid>
           &copy; {new Date().getFullYear()} Copyright:{" "}
           <a href="https://www.xrayglazing.co.uk/">Xray Glazing Ltd</a>
+          <div>
+            Created By: <a href="http://behzad.site">Behzad Kakavand</a>
+          </div>
         </MDBContainer>
       </div>
     </MDBFooter>

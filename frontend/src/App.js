@@ -70,11 +70,14 @@ class App extends Component {
               logout: this.logout
             }}
           >
-            <MainNavigation navbarData={navbarData} />
             {this.state.isLoading ? (
               <Spinner />
             ) : (
               <div>
+                <MainNavigation
+                  navbarData={navbarData}
+                  products={this.state.products}
+                />
                 <Switch>
                   <Route
                     path="/"

@@ -3,6 +3,7 @@ import Spinner from "../components/Spinner/Spinner";
 import ShowProduct from "../components/ShowProduct/ShowProduct";
 import EditProduct from "../components/EditProduct/EditProduct";
 import AuthContext from "../context/authContext";
+import { Redirect } from "react-router-dom";
 
 class ProductsPage extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class ProductsPage extends Component {
       link: null,
       isEditing: false,
       banner: "",
-      mainPhotos: ""
+      mainPhotos: "",
+      deleted: false
     };
     this.subCatEl = React.createRef();
     this.groupEl = React.createRef();
@@ -89,7 +91,6 @@ class ProductsPage extends Component {
     };
     const requestBody = { ...product };
     const token = this.context.token;
-    console.log(token);
     fetch(`/api/products/${product.subCat}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),
@@ -127,6 +128,7 @@ class ProductsPage extends Component {
         }
         return res;
       })
+      .then(res => this.setState({ deleted: true }))
       .catch(err => {
         console.log(err);
       });
@@ -175,6 +177,7 @@ class ProductsPage extends Component {
             bannerImage={this.bannerImageHandler}
           />
         )}
+        {this.state.deleted && <Redirect to="/" exact />}
       </div>
     );
   }

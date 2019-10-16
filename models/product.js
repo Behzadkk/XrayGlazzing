@@ -6,7 +6,10 @@ const productSchema = new mongoose.Schema({
     required: "must be one of the main categories"
   },
   subCat: String,
-  name: String,
+  name: {
+    type: String,
+    required: "must have a name"
+  },
   description: String,
   keyFeatures: String,
   moreInfo: String,

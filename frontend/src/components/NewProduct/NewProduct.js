@@ -19,6 +19,7 @@ const NewProduct = props => {
                 id="name"
                 placeholder="Fixed Rooflight"
                 ref={props.subCatInput}
+                required={true}
               />
             </div>
           </div>

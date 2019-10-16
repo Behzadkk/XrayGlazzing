@@ -22,7 +22,6 @@ class DrawingsPage extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
         const drawings = resData.drawings;
 
         this.setState({ isLoading: false, drawings });
@@ -43,7 +42,7 @@ class DrawingsPage extends Component {
                 <div key={i}>
                   <h5>{drawing.category.name}</h5>
                   <Link to={drawing.source}>
-                    <i class="far fa-file-pdf"></i>Download
+                    <i className="far fa-file-pdf"></i>Download
                   </Link>
                 </div>
               );

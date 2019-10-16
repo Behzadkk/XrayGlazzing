@@ -14,10 +14,17 @@ class CategoryPage extends Component {
   componentDidMount() {
     this.fetchCategory();
   }
-
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params.category !== this.props.match.params.category) {
+      this.setState(
+        { isLoading: true, category: this.props.match.params.category },
+        this.fetchCategory()
+      );
+    }
+  }
   fetchCategory = () => {
     this.setState({ isLoading: true });
-    fetch(`/api/category/${this.props.match.params.category}`)
+    fetch(`/api/category/${this.state.category}`)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");

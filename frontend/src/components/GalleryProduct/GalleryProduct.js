@@ -121,7 +121,7 @@ class GalleryModal extends Component {
     return (
       <div>
         <div className="modal-overlay" onClick={closeModal}></div>
-        <div className="modal">
+        <div className="modal container">
           <div className="modal-body">
             <a
               href="#"

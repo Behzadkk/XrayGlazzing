@@ -6,7 +6,7 @@ const DropDown = props => {
     return (
       <NavLink
         key={i}
-        to={"/products/" + product.link}
+        to={"/products/" + product.subCat}
         className="dropdown-item"
       >
         {product.name}

@@ -12,7 +12,7 @@ router.get("/category/:category", productController.getACategory);
 router.get("/products/:productType", productController.getAProduct);
 router.post("/products", productController.createAProduct);
 router.put("/products/:productType", productController.editAProduct);
-router.delete("/products/:id", productController.deleteAProduct);
+router.delete("/products", productController.deleteAProduct);
 
 router.get("/gallery", photoController.getAllPhotos);
 router.get("/gallery/:productType", photoController.getPhotos);

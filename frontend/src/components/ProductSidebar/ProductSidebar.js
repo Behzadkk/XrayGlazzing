@@ -12,7 +12,7 @@ const ProductSidebar = props => (
               src={props.photos[0].source}
               alt={props.product.subCat}
             />
-            {props.product.name}'s Gallery
+            <p className="d-inline small">{props.product.name}'s Gallery</p>
           </div>
         </Link>
       </li>
@@ -29,7 +29,7 @@ const ProductSidebar = props => (
               src={props.photos[0].source}
               alt="gallery"
             />
-            {props.product.name}'s Projects
+            <p className="d-inline small">{props.product.name}'s Projects</p>
           </div>
         </Link>
       </li>
@@ -45,7 +45,7 @@ const ProductSidebar = props => (
               src={props.photos[0].source}
               alt="gallery"
             />
-            {props.product.name}'s Drawings
+            <p className="d-inline small">{props.product.name}'s Drawings</p>
           </div>
         </Link>
       </li>

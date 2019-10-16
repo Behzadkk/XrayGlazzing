@@ -17,3 +17,11 @@
   visibility: visible !important;
   border: 0;
 }
+a {
+  text-decoration: none;
+  color: #000;
+}
+a:hover {
+  text-decoration: none;
+  color: #272727;
+}
