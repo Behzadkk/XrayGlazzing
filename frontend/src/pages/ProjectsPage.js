@@ -15,7 +15,6 @@ class ProjectsPage extends Component {
     this.fetchProjects();
   }
   projectViewHandler = project => {
-    console.log(project);
     this.setState({ selectedProject: project });
   };
   closeModal = () => {

@@ -26,7 +26,7 @@ const ProductSidebar = props => (
           <div>
             <img
               className="img-thumbnail side-image mr-2"
-              src={props.photos[0].source}
+              src={props.photos[0] ? props.photos[0].source : ""}
               alt="gallery"
             />
             <p className="d-inline small">{props.product.name}'s Projects</p>
@@ -39,7 +39,7 @@ const ProductSidebar = props => (
           <div>
             <img
               className="img-thumbnail side-image mr-2"
-              src={props.photos[0].source}
+              src={props.photos[0] ? props.photos[0].source : ""}
               alt="gallery"
             />
             <p className="d-inline small">Recent Projects</p>
@@ -53,7 +53,7 @@ const ProductSidebar = props => (
         <div>
           <img
             className="img-thumbnail side-image mr-2"
-            src={props.photos[0].source}
+            src={props.photos[0] ? props.photos[0].source : ""}
             alt="gallery"
           />
           {props.product.drawings[0] ? (

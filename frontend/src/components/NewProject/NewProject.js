@@ -1,4 +1,5 @@
 import React from "react";
+import QuillEditor from "../QuillEditor/QuillEditor";
 
 const NewProject = props => {
   return (
@@ -27,14 +28,7 @@ const NewProject = props => {
               Description
             </label>
             <div className="col-sm-9">
-              <textarea
-                className="form-control"
-                rows="4"
-                cols="50"
-                id="description"
-                placeholder="Excepteur nostrud ipsum reprehenderit eu cillum aliquip mollit voluptate aute esse sint culpa magna ipsum."
-                ref={props.projDescInput}
-              />
+              <QuillEditor editorValue={props.getEditorValue} />
             </div>
           </div>
           <div className="form-group row justify-content-end mt-5 mt-sm-0">

@@ -12,12 +12,16 @@ class AdminsPage extends Component {
     super(props);
     this.subCatEl = React.createRef();
     this.groupEl = React.createRef();
-    this.descEl = React.createRef();
     this.projectEl = React.createRef();
     this.projDescEl = React.createRef();
   }
   static contextType = AuthContext;
-  state = { creatingAsset: "none", images: [] };
+  state = {
+    creatingAsset: "none",
+    images: [],
+    productDetails: "",
+    projectDetails: ""
+  };
   selectTypeHandler = e => {
     this.setState({ creatingAsset: e.target.value });
   };
@@ -25,8 +29,6 @@ class AdminsPage extends Component {
     this.setState(prevState => {
       return { images: [images] };
     });
-    console.log(images);
-    console.log(this.state.images);
   };
   slug = words => {
     return words
@@ -34,12 +36,18 @@ class AdminsPage extends Component {
       .map(w => w.toLowerCase())
       .join("_");
   };
+  productDetailsHandler = value => {
+    this.setState({ productDetails: value });
+  };
+  prodjetDetailsHandler = value => {
+    this.setState({ projectDetails: value });
+  };
   confirmProduct = e => {
     e.preventDefault();
     const token = this.context.token;
     const name = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
-    const description = this.descEl.current.value;
+    const description = this.state.productDetails;
     const subCat = this.slug(name);
     const mainPhotos = [...this.state.images];
     const product = { name, subCat, group, description, mainPhotos };
@@ -66,7 +74,7 @@ class AdminsPage extends Component {
   confirmProject = e => {
     e.preventDefault();
     const name = this.projectEl.current.value;
-    const description = this.projDescEl.current.value;
+    const description = this.state.projectDetails;
     const token = this.context.token;
     const requestBody = { name, description };
     fetch("/api/projects", {
@@ -101,7 +109,7 @@ class AdminsPage extends Component {
             onConfirm={this.confirmProduct}
             subCatInput={this.subCatEl}
             groupInput={this.groupEl}
-            descInput={this.descEl}
+            getEditorValue={this.productDetailsHandler}
           />
         )}
         {this.state.creatingAsset === "photo" && (
@@ -112,6 +120,7 @@ class AdminsPage extends Component {
             onConfirm={this.confirmProject}
             projectInput={this.projectEl}
             projDescInput={this.projDescEl}
+            getEditorValue={this.prodjetDetailsHandler}
           />
         )}
         {this.state.creatingAsset === "drawing" && (

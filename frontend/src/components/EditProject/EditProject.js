@@ -1,6 +1,7 @@
 import React from "react";
 import GalleryImagePicker from "../GalleryImagePicker/GalleryImagePicker";
 import ProductSelect from "../ProductSelect/ProductSelect";
+import QuillEditor from "../QuillEditor/QuillEditor";
 
 const EditProject = props => {
   return (
@@ -31,13 +32,9 @@ const EditProject = props => {
               Description
             </label>
             <div className="col-sm-9">
-              <textarea
-                className="form-control"
-                rows="4"
-                cols="50"
-                id="description"
-                defaultValue={props.project.description}
-                ref={props.projDescInput}
+              <QuillEditor
+                editorValue={props.getEditorValue}
+                text={props.project.description}
               />
             </div>
           </div>

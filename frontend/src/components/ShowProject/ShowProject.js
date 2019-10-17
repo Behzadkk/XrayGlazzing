@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Markup } from "interweave";
 import EditProject from "../EditProject/EditProject";
 import ProductGallery from "../ProductGallery/ProductGallery";
 import { Redirect } from "react-router-dom";
@@ -7,13 +8,13 @@ class ShowProject extends Component {
   constructor(props) {
     super(props);
     this.projectEl = React.createRef();
-    this.projDescEl = React.createRef();
     this.state = {
       isLoading: true,
       isEditing: false,
       photos: [],
       projects: [],
       products: [],
+      projDesc: "",
       deleted: false
     };
   }
@@ -53,10 +54,13 @@ class ShowProject extends Component {
     const productIds = productsList.map(p => p.value);
     this.setState({ products: productIds });
   };
+  ProjDescHandler = value => {
+    this.setState({ projDesc: value });
+  };
   confirmEdit = e => {
     e.preventDefault();
     const name = this.projectEl.current.value;
-    const description = this.projDescEl.current.value;
+    const description = this.state.projDesc;
     const photos = this.state.photos;
     const products = this.state.products;
 
@@ -108,7 +112,7 @@ class ShowProject extends Component {
             <div className="row">
               <div className="col-md-9">
                 <div className="my-5">
-                  <p>{this.state.projects[0].description}</p>
+                  <Markup content={this.state.projects[0].description} />
                 </div>
               </div>
             </div>
@@ -140,9 +144,9 @@ class ShowProject extends Component {
             photos={this.state.projects[1].photos}
             onConfirm={this.confirmEdit}
             projectInput={this.projectEl}
-            projDescInput={this.projDescEl}
             selectedImages={this.imageHandler}
             selectProducts={this.productSelectHandler}
+            getEditorValue={this.ProjDescHandler}
           />
         )}
         {this.state.deleted && <Redirect to="/projects" exact />}

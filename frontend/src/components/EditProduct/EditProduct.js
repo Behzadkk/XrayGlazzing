@@ -1,5 +1,6 @@
 import React from "react";
 import GalleryImagePicker from "../GalleryImagePicker/GalleryImagePicker";
+import QuillEditor from "../QuillEditor/QuillEditor";
 
 const EditProduct = props => (
   <div className="container">
@@ -59,14 +60,10 @@ const EditProduct = props => (
               Description
             </label>
             <div className="col-sm-9">
-              <textarea
-                className="form-control"
-                rows="4"
-                cols="50"
-                id="description"
-                defaultValue={props.product.description}
-                ref={props.descInput}
-              ></textarea>
+              <QuillEditor
+                text={props.product.description}
+                editorValue={props.descInput}
+              />
             </div>
           </div>
           <div className="form-group row justify-content-between">
@@ -74,14 +71,10 @@ const EditProduct = props => (
               Key Features
             </label>
             <div className="col-sm-9">
-              <textarea
-                className="form-control"
-                rows="4"
-                cols="50"
-                id="keyFeatures"
-                defaultValue={props.product.keyFeatures}
-                ref={props.keyFeatureInput}
-              ></textarea>
+              <QuillEditor
+                text={props.product.keyFeatures}
+                editorValue={props.keyFeatureInput}
+              />
             </div>
           </div>
           <div className="form-group row justify-content-between">
@@ -89,14 +82,10 @@ const EditProduct = props => (
               More Info
             </label>
             <div className="col-sm-9">
-              <textarea
-                className="form-control"
-                rows="4"
-                cols="50"
-                id="moreInfo"
-                defaultValue={props.product.moreInfo}
-                ref={props.moreInfoInput}
-              ></textarea>
+              <QuillEditor
+                text={props.product.moreInfo}
+                editorValue={props.moreInfoInput}
+              />
             </div>
           </div>
           <div className="form-group row justify-content-between">
@@ -104,12 +93,9 @@ const EditProduct = props => (
               Sub Heading
             </label>
             <div className="col-sm-9">
-              <input
-                className="form-control"
-                type="text"
-                id="subHeading"
-                ref={props.subHeadInput}
-                value={props.product.subHeading}
+              <QuillEditor
+                text={props.product.subHeading}
+                editorValue={props.subHeadInput}
               />
             </div>
           </div>
@@ -118,14 +104,10 @@ const EditProduct = props => (
               More Details
             </label>
             <div className="col-sm-9">
-              <textarea
-                className="form-control"
-                rows="4"
-                cols="50"
-                id="moreDetails"
-                defaultValue={props.product.moreDetails}
-                ref={props.moreDetailsInput}
-              ></textarea>
+              <QuillEditor
+                text={props.product.moreDetails}
+                editorValue={props.moreDetailsInput}
+              />
             </div>
           </div>
 
@@ -139,7 +121,6 @@ const EditProduct = props => (
               />
             </div>
           </div>
-
           <div className="form-group row justify-content-end mt-5 mt-sm-0">
             <div className="col-sm-9">
               <button

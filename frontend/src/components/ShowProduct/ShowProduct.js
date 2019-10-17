@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Markup } from "interweave";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import ProductGallery from "../ProductGallery/ProductGallery";
 import ProductSidebar from "../ProductSidebar/ProductSidebar";
@@ -25,7 +25,7 @@ const ShowProduct = props => {
               <ProductGallery photos={props.photos.photos} />
             </div>
             <div>
-              <h3>{props.product.subHeading}</h3>
+              <Markup content={props.product.subHeading} />
             </div>
           </div>
           <div className="col-md-3 my-5">
@@ -36,7 +36,7 @@ const ShowProduct = props => {
                 product={props.product}
               />
             </aside>
-            <div className="mt-4">{props.product.moreInfo}</div>
+            <Markup content={props.product.moreInfo} />
           </div>
         </div>
       </div>

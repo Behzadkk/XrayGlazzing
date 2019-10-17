@@ -1,4 +1,5 @@
 import React from "react";
+import { Markup } from "interweave";
 
 const ProductDetail = props => {
   return (
@@ -40,13 +41,13 @@ const ProductDetail = props => {
                     alt={props.product.subCat}
                   />
                 )}
-                <p className="">{props.product.description}</p>
+                <Markup content={props.product.description} />
               </div>
               <div className="tab-pane" id="ketFeatures">
-                <p>{props.product.keyFeatures}</p>
+                <Markup content={props.product.keyFeatures} />
               </div>
               <div className="tab-pane" id="moreDetails">
-                <p>{props.product.moreDetails}</p>
+                <Markup content={props.product.moreDetails} />
               </div>
             </div>
           </div>

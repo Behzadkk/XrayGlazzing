@@ -15,21 +15,35 @@ class ProductsPage extends Component {
       isEditing: false,
       banner: "",
       mainPhotos: "",
-      deleted: false
+      deleted: false,
+      description: "",
+      keyFeatures: "",
+      moreInfo: "",
+      subHeading: "",
+      moreDetails: ""
     };
     this.subCatEl = React.createRef();
     this.groupEl = React.createRef();
-    this.descEl = React.createRef();
-    this.keyFeatureEl = React.createRef();
-    this.moreInfoEl = React.createRef();
-    this.subHeadEl = React.createRef();
-    this.moreDetailsEl = React.createRef();
   }
   static contextType = AuthContext;
   componentDidMount() {
     this.fetchProduct();
   }
-
+  descEl = value => {
+    this.setState({ description: value });
+  };
+  keyFeatureEl = value => {
+    this.setState({ keyFeatures: value });
+  };
+  moreInfoEl = value => {
+    this.setState({ moreInfo: value });
+  };
+  subHeadEl = value => {
+    this.setState({ subHeading: value });
+  };
+  moreDetailsEl = value => {
+    this.setState({ moreDetails: value });
+  };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.product !== this.props.match.params.product) {
       this.setState({ isEditing: false });
@@ -47,7 +61,13 @@ class ProductsPage extends Component {
         return res.json();
       })
       .then(resData => {
-        this.setState({ product: resData.products, isLoading: false });
+        this.setState({
+          product: resData.products,
+          isLoading: false,
+          banner: resData.products[0].banner[0],
+          mainPhotos: resData.products[0].mainPhotos
+        });
+        console.log(resData.products);
       })
       .catch(err => {
         console.log(err);
@@ -71,11 +91,11 @@ class ProductsPage extends Component {
 
     const subCat = this.subCatEl.current.value;
     const group = this.groupEl.current.value;
-    const description = this.descEl.children;
-    const keyFeatures = this.keyFeatureEl.current.value;
-    const moreInfo = this.moreInfoEl.current.value;
-    const subHeading = this.subHeadEl.current.value;
-    const moreDetails = this.moreDetailsEl.current.value;
+    const description = this.state.description;
+    const keyFeatures = this.state.keyFeatures;
+    const moreInfo = this.state.moreInfo;
+    const subHeading = this.state.subHeading;
+    const moreDetails = this.state.moreDetails;
     const mainPhotos = this.state.mainPhotos;
     const banner = this.state.banner;
     const product = {
