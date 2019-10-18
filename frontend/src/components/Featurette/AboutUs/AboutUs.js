@@ -1,8 +1,8 @@
 import React from "react";
 
 const AboutUs = () => (
-  <div className="row featurette">
-    <div className="col-md-7 order-md-2">
+  <div className="row featurette justify-content-around">
+    <div className="col-lg-6 order-lg-2">
       <h2 className="featurette-heading">ABOUT US</h2>
       <p className="lead">
         We specialise in the supply and installation of custom made sliding
@@ -12,9 +12,9 @@ const AboutUs = () => (
         glazing solutions.
       </p>
     </div>
-    <div className="col-md-5 order-md-1">
+    <div className="col-lg-5 order-lg-1">
       <img
-        className="w-100"
+        className="w-100 mt-4"
         src="https://res.cloudinary.com/dadhpknsf/image/upload/v1570612521/blq1rks4kalexrfwh4gf.jpg"
         alt="about xray glazing"
       />

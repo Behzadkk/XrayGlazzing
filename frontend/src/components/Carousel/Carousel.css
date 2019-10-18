@@ -1,3 +1,4 @@
 .carousel-item {
   max-height: 80vh;
+  height: calc (100% - 20vh);
 }

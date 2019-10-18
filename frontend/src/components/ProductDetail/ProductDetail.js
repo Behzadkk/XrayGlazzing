@@ -7,26 +7,34 @@ const ProductDetail = props => {
       <div className="col-md-12">
         <div className="my-5">
           <div id="exTab2">
-            <ul className="nav nav-tabs">
+            <ul className="nav nav-tabs justify-content-between justify-content-sm-start">
               <li className="nav-item">
                 <a
                   href="#description"
                   data-toggle="tab"
-                  className="nav-link active"
+                  className="nav-link active p-2"
                 >
                   Descriptions
                 </a>
               </li>
               {props.product.keyFeatures && (
                 <li className="nav-item">
-                  <a href="#ketFeatures" data-toggle="tab" className="nav-link">
+                  <a
+                    href="#ketFeatures"
+                    data-toggle="tab"
+                    className="nav-link p-2"
+                  >
                     Key Features
                   </a>
                 </li>
               )}
               {props.product.moreDetails && (
                 <li className="nav-item">
-                  <a href="#moreDetails" data-toggle="tab" className="nav-link">
+                  <a
+                    href="#moreDetails"
+                    data-toggle="tab"
+                    className="nav-link p-2"
+                  >
                     More Details
                   </a>
                 </li>

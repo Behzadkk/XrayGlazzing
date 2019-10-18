@@ -459,10 +459,19 @@
     padding: 5px 10px;
   }
 }
-
-.image-gallery-image img {
-  height: 39rem;
+@media (max-width: 768px) {
+  .image-gallery-image img {
+    height: 32vh;
+    max-width: 100%;
+  }
 }
+@media (min-width: 769px) {
+  .image-gallery-image img {
+    height: 60vh;
+    max-width: 100%;
+  }
+}
+
 .image-gallery-image {
   display: flex;
   justify-content: center;

@@ -17,14 +17,17 @@ const DropDown = props => {
     <li className="nav-item dropdown">
       <NavLink
         className="nav-link dropdown-toggle"
-        to={"/category/" + props.name}
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
+        id="dropdown01"
+        to={props.link ? "/category/" + props.link : "/category/" + props.name}
       >
         {props.name}
       </NavLink>
-      <div className="dropdown-menu dropdown-content m-0 p-0">{navItems}</div>
+      <div
+        className="dropdown-menu dropdown-content m-0 p-0"
+        onClick={props.clickHandler}
+      >
+        {navItems}
+      </div>
     </li>
   );
 };

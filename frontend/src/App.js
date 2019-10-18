@@ -4,7 +4,6 @@ import "./App.css";
 
 import AuthContext from "./context/authContext";
 import MainNavigation from "./components/Navigation/MainNav";
-import navbarData from "./components/Navigation/navbarData";
 import LandingPage from "./pages/LandingPage";
 import ProductsPage from "./pages/ProductsPage";
 import Footer from "./components/Footer/Footer";
@@ -74,10 +73,7 @@ class App extends Component {
               <Spinner />
             ) : (
               <div>
-                <MainNavigation
-                  navbarData={navbarData}
-                  products={this.state.products}
-                />
+                <MainNavigation products={this.state.products} />
                 <Switch>
                   <Route
                     path="/"

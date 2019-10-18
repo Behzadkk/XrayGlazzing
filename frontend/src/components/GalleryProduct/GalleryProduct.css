@@ -60,7 +60,7 @@
   position: fixed;
   z-index: 999;
   max-height: 100vh;
-  top: 50%;
+  top: 60%;
   left: 50%;
   display: block;
   transform: translate3d(-50%, -50%, 0);

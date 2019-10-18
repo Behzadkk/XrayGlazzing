@@ -18,7 +18,7 @@ class CategoryPage extends Component {
     if (prevProps.match.params.category !== this.props.match.params.category) {
       this.setState(
         { isLoading: true, category: this.props.match.params.category },
-        this.fetchCategory()
+        () => this.fetchCategory()
       );
     }
   }

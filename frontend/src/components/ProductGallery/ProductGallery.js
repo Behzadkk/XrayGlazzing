@@ -6,7 +6,7 @@ import ImageGallery from "react-image-gallery";
 
 const ProductGallery = props => {
   return (
-    <div>
+    <div className="gallery-container">
       <ImageGallery items={props.photos} />
     </div>
   );

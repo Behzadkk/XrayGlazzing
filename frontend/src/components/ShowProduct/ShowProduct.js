@@ -36,7 +36,7 @@ class ShowProduct extends Component {
                   <ProductGallery photos={this.props.photos} />
                 )}
               </div>
-              <div>
+              <div className="container mt-5">
                 <Markup content={this.props.product.subHeading} />
               </div>
             </div>
@@ -47,8 +47,10 @@ class ShowProduct extends Component {
                   photos={this.props.photos}
                   product={this.props.product}
                 />
+                <div className="container mt-5">
+                  <Markup content={this.props.product.moreInfo} />
+                </div>
               </aside>
-              <Markup content={this.props.product.moreInfo} />
             </div>
           </div>
         </div>
