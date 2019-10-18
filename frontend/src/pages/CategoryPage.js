@@ -12,36 +12,28 @@ class CategoryPage extends Component {
     };
   }
   componentDidMount() {
-    this.fetchCategory();
+    this.showCategory();
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.category !== this.props.match.params.category) {
       this.setState(
         { isLoading: true, category: this.props.match.params.category },
-        () => this.fetchCategory()
+        () => this.showCategory()
       );
     }
   }
-  fetchCategory = () => {
-    this.setState({ isLoading: true });
-    fetch(`/api/category/${this.state.category}`)
-      .then(res => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error("Failed!");
-        }
-        return res.json();
-      })
-      .then(resData => {
-        this.setState({
-          products: resData.products,
-          banner: resData.products[0].banner[0],
-          isLoading: false
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ isLoading: false });
-      });
+
+  showCategory = () => {
+    console.log(this.props.products);
+    const products = this.props.products.filter(
+      p => p.group === this.props.match.params.category.toLowerCase()
+    );
+    console.log(products);
+    this.setState({
+      products: products,
+      banner: products[0].banner[0],
+      isLoading: false
+    });
   };
 
   render() {

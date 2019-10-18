@@ -111,7 +111,9 @@ class App extends Component {
                   <Route path="/about" component={AboutUsPage} />
                   <Route
                     path="/category/:category"
-                    render={props => <CategoryPage {...props} />}
+                    render={props => (
+                      <CategoryPage {...props} products={this.state.products} />
+                    )}
                   />
 
                   {this.state.token && <Redirect from="/auth" to="/" exact />}
