@@ -15,14 +15,14 @@ class ShowProject extends Component {
       projects: [],
       products: [],
       projDesc: "",
-      deleted: false
+      deleted: false,
+      images: null
     };
   }
   static contextType = AuthContext;
 
   componentDidMount() {
     this.fetchProjects();
-    console.log(this.context.token);
   }
 
   fetchProjects() {
@@ -35,7 +35,19 @@ class ShowProject extends Component {
         return res.json();
       })
       .then(resData => {
-        this.setState({ isLoading: false, projects: resData.projects });
+        const images = [];
+        const photos = resData.projects[1].photos;
+        photos.map(photo => {
+          return images.push({
+            original: photo.source,
+            thumbnail: photo.source
+          });
+        });
+        this.setState({
+          isLoading: false,
+          projects: resData.projects[0],
+          images
+        });
       })
       .catch(err => {
         console.log(err);
@@ -67,7 +79,7 @@ class ShowProject extends Component {
     const requestBody = { name, description, photos, products };
     const token = this.context.token;
 
-    fetch(`/api/projects/${this.state.projects[0]._id}`, {
+    fetch(`/api/projects/${this.state.projects._id}`, {
       method: "PUT",
       body: JSON.stringify(requestBody),
       headers: {
@@ -88,7 +100,7 @@ class ShowProject extends Component {
   };
 
   deleteProjectHandler = () => {
-    const id = this.state.projects[0]._id;
+    const id = this.state.projects._id;
     const token = this.context.token;
     fetch(`/api/projects/${id}`, {
       method: "DELETE",
@@ -107,17 +119,17 @@ class ShowProject extends Component {
         {!this.state.isLoading && (
           <div>
             <h1 className="text-center m-5">
-              {this.state.projects[0].name.toUpperCase()}
+              {this.state.projects.name.toUpperCase()}
             </h1>
             <div className="row">
               <div className="col-md-9">
                 <div className="my-5">
-                  <Markup content={this.state.projects[0].description} />
+                  <Markup content={this.state.projects.description} />
                 </div>
               </div>
             </div>
             <div className="check">
-              <ProductGallery photos={this.state.projects[1].photos} />
+              <ProductGallery photos={this.state.images} />
             </div>
           </div>
         )}
@@ -140,8 +152,8 @@ class ShowProject extends Component {
         )}
         {this.state.isEditing && (
           <EditProject
-            project={this.state.projects[0]}
-            photos={this.state.projects[1].photos}
+            project={this.state.projects}
+            photos={this.state.images}
             onConfirm={this.confirmEdit}
             projectInput={this.projectEl}
             selectedImages={this.imageHandler}

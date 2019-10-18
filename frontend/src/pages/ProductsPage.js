@@ -20,14 +20,17 @@ class ProductsPage extends Component {
       keyFeatures: "",
       moreInfo: "",
       subHeading: "",
-      moreDetails: ""
+      moreDetails: "",
+      images: [],
+      LoadingGallery: true
     };
     this.subCatEl = React.createRef();
     this.groupEl = React.createRef();
   }
   static contextType = AuthContext;
   componentDidMount() {
-    this.fetchProduct();
+    this.showProduct();
+    this.fetchPhotos();
   }
   descEl = value => {
     this.setState({ description: value });
@@ -46,14 +49,29 @@ class ProductsPage extends Component {
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.product !== this.props.match.params.product) {
-      this.setState({ isEditing: false });
-      this.fetchProduct();
+      this.setState({
+        isEditing: false
+      });
+      this.showProduct();
+      this.fetchPhotos();
     }
   }
+  showProduct = () => {
+    const product = this.props.products.filter(
+      p => p.subCat === this.props.match.params.product
+    );
 
-  fetchProduct = () => {
-    this.setState({ isLoading: true });
-    fetch(`/api/products/${this.props.match.params.product}`)
+    this.setState({
+      product: product[0],
+      banner: product[0].banner[0],
+      mainPhotos: product[0].mainPhotos,
+      isLoading: false
+    });
+  };
+
+  fetchPhotos = () => {
+    this.setState({ LoadingGallery: true });
+    fetch(`/api/gallery/${this.props.match.params.product}`)
       .then(res => {
         if (res.status !== 200 && res.status !== 201) {
           throw new Error("Failed!");
@@ -61,17 +79,22 @@ class ProductsPage extends Component {
         return res.json();
       })
       .then(resData => {
-        this.setState({
-          product: resData.products,
-          isLoading: false,
-          banner: resData.products[0].banner[0],
-          mainPhotos: resData.products[0].mainPhotos
+        const images = [];
+        const photos = resData.photos;
+        photos.map(photo => {
+          return images.push({
+            original: photo.source,
+            thumbnail: photo.source
+          });
         });
-        console.log(resData.products);
+        return this.setState({ images });
+      })
+      .then(res => {
+        this.setState({ LoadingGallery: false });
       })
       .catch(err => {
         console.log(err);
-        this.setState({ isLoading: false });
+        this.setState({ LoadingGallery: false });
       });
   };
 
@@ -133,7 +156,7 @@ class ProductsPage extends Component {
   };
 
   deleteProductHandler = () => {
-    const id = this.state.product[0]._id;
+    const id = this.state.product._id;
     fetch(`/api/products`, {
       method: "DELETE",
       body: JSON.stringify({ id: id }),
@@ -159,10 +182,14 @@ class ProductsPage extends Component {
         {this.state.isLoading ? (
           <Spinner />
         ) : (
-          <ShowProduct
-            product={this.state.product[0]}
-            photos={this.state.product[1]}
-          />
+          <div>
+            <ShowProduct
+              product={this.state.product}
+              LoadingGallery={this.state.LoadingGallery}
+              photos={this.state.images}
+              // photos={this.state.product[1]}
+            />
+          </div>
         )}
         {this.context.token && (
           <div>
@@ -183,8 +210,8 @@ class ProductsPage extends Component {
 
         {this.state.isEditing && (
           <EditProduct
-            product={this.state.product[0]}
-            photos={this.state.product[1].photos}
+            product={this.state.product}
+            photos={this.state.images}
             onConfirm={this.confirmEdit}
             subCatInput={this.subCatEl}
             groupInput={this.groupEl}

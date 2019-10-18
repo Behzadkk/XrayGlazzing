@@ -22,7 +22,7 @@ class GalleryImagePicker extends Component {
         <ImagePicker
           images={this.props.photos.map((image, i) => ({
             imageId: image._id,
-            src: image.source,
+            src: image.original,
             value: i
           }))}
           onPick={this.onPick}
