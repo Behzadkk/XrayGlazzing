@@ -24,11 +24,9 @@ class CategoryPage extends Component {
   }
 
   showCategory = () => {
-    console.log(this.props.products);
     const products = this.props.products.filter(
       p => p.group === this.props.match.params.category.toLowerCase()
     );
-    console.log(products);
     this.setState({
       products: products,
       banner: products[0].banner[0],

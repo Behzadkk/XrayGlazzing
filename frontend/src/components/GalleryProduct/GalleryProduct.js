@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./GalleryProduct.css";
+import Spinner from "../Spinner/Spinner";
 
 class GalleryProduct extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class GalleryProduct extends Component {
     this.fetchImages();
   }
   fetchImages = () => {
+    window.scrollTo(0, 0);
     this.setState({ isLoading: true });
     fetch("/api/gallery/" + this.props.match.params.product)
       .then(res => {
@@ -29,7 +31,7 @@ class GalleryProduct extends Component {
       .then(resData => {
         const images = resData.photos.map(photo => photo.source);
 
-        this.setState({ isLoading: false, images });
+        this.setState({ isLoading: false, images, product: resData.category });
       })
       .catch(err => {
         console.log(err);
@@ -69,22 +71,36 @@ class GalleryProduct extends Component {
       currentIndex: prevState.currentIndex + 1
     }));
   }
+  captialize(words) {
+    return words
+      .split("_")
+      .map(w => w.substring(0, 1).toUpperCase() + w.substring(1))
+      .join(" ");
+  }
 
   render() {
     return (
       <div className="gallery-container">
-        <h2 className="display-4 text-center m-5">Gallery</h2>
-        <div className="gallery-grid">
-          {this.state.images.map(this.renderImageContent)}
-        </div>
-        <GalleryModal
-          closeModal={this.closeModal}
-          findPrev={this.findPrev}
-          findNext={this.findNext}
-          hasPrev={this.state.currentIndex > 0}
-          hasNext={this.state.currentIndex + 1 < this.state.images.length}
-          src={this.state.images[this.state.currentIndex]}
-        />
+        <h2 className="display-4 text-center m-5">
+          {this.captialize(this.props.match.params.product)}
+        </h2>
+        {this.state.isLoading ? (
+          <Spinner />
+        ) : (
+          <React.Fragment>
+            <div className="gallery-grid">
+              {this.state.images.map(this.renderImageContent)}
+            </div>
+            <GalleryModal
+              closeModal={this.closeModal}
+              findPrev={this.findPrev}
+              findNext={this.findNext}
+              hasPrev={this.state.currentIndex > 0}
+              hasNext={this.state.currentIndex + 1 < this.state.images.length}
+              src={this.state.images[this.state.currentIndex]}
+            />
+          </React.Fragment>
+        )}
       </div>
     );
   }

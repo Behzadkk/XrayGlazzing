@@ -4,6 +4,7 @@ import EditProject from "../EditProject/EditProject";
 import ProductGallery from "../ProductGallery/ProductGallery";
 import { Redirect } from "react-router-dom";
 import AuthContext from "../../context/authContext";
+import Spinner from "../Spinner/Spinner";
 class ShowProject extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +27,7 @@ class ShowProject extends Component {
   }
 
   fetchProjects() {
+    window.scrollTo(0, 0);
     this.setState({ isLoading: true });
     fetch("/api/projects/" + this.props.match.params.id)
       .then(res => {
@@ -116,7 +118,9 @@ class ShowProject extends Component {
   render() {
     return (
       <div className="container">
-        {!this.state.isLoading && (
+        {this.state.isLoading ? (
+          <Spinner />
+        ) : (
           <div>
             <h1 className="text-center m-5">
               {this.state.projects.name.toUpperCase()}
@@ -135,7 +139,7 @@ class ShowProject extends Component {
         )}
 
         {this.context.token && (
-          <div>
+          <div className="container">
             <button
               className="btn btn-sm btn-warning"
               onClick={this.editingProject}

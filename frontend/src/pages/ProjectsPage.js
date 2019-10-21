@@ -21,6 +21,7 @@ class ProjectsPage extends Component {
     this.setState({ selectedProject: null });
   };
   fetchProjects = () => {
+    window.scrollTo(0, 0);
     let api = "/api/projects";
     if (this.props.match.params.product) {
       api = "/api/" + this.props.match.params.product + "/projects";

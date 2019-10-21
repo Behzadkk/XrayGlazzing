@@ -57,6 +57,7 @@ class ProductsPage extends Component {
     }
   }
   showProduct = () => {
+    window.scrollTo(0, 0);
     const product = this.props.products.filter(
       p => p.subCat === this.props.match.params.product
     );
@@ -187,12 +188,11 @@ class ProductsPage extends Component {
               product={this.state.product}
               LoadingGallery={this.state.LoadingGallery}
               photos={this.state.images}
-              // photos={this.state.product[1]}
             />
           </div>
         )}
         {this.context.token && (
-          <div>
+          <div className="container">
             <button
               className="btn btn-sm btn-warning"
               onClick={this.editingProduct}

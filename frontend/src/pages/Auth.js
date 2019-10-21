@@ -64,7 +64,6 @@ class AuthPage extends Component {
             resData.tokenExpiration
           );
         }
-        console.log(this.context.userId);
       })
       .catch(err => {
         console.log(err);
@@ -73,14 +72,16 @@ class AuthPage extends Component {
 
   render() {
     return (
-      <LoginForm
-        onFormSubmition={this.submitHandler}
-        emailEl={this.emailInput}
-        passwordEl={this.passwordInput}
-        adminCodeEl={this.adminCodeInput}
-        onSwitchMode={this.switchModeHandler}
-        loginState={this.state.isLogin}
-      />
+      <div className="container">
+        <LoginForm
+          onFormSubmition={this.submitHandler}
+          emailEl={this.emailInput}
+          passwordEl={this.passwordInput}
+          adminCodeEl={this.adminCodeInput}
+          onSwitchMode={this.switchModeHandler}
+          loginState={this.state.isLogin}
+        />
+      </div>
     );
   }
 }

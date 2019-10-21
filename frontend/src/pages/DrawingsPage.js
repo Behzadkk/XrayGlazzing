@@ -11,6 +11,7 @@ class DrawingsPage extends Component {
     this.fetchDrawings();
   }
   fetchDrawings = () => {
+    window.scrollTo(0, 0);
     this.setState({ isLoading: true });
     fetch("/api/drawings")
       .then(res => {
@@ -39,8 +40,8 @@ class DrawingsPage extends Component {
               return (
                 <div key={i}>
                   <h5>{drawing.name}</h5>
-                  {drawing.drawings.map(d => (
-                    <div>
+                  {drawing.drawings.map((d, i) => (
+                    <div key={i}>
                       <a href={d.source}>
                         <i className="far fa-file-pdf"></i>Download {d.name}
                       </a>
